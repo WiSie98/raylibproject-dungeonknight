@@ -14,22 +14,16 @@ int main() {
     ToggleFullscreen();
 #endif
 
-    // Your own initialization code here
-    // ...
-    // ...
+    //Initialization code here
     Texture2D myTexture = LoadTexture("assets/graphics/testimage.png");
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
-        // Updates that are made by frame are coded here
-        // ...
-        // ...
+        //Update code here
 
         BeginDrawing();
-            // You can draw on the screen between BeginDrawing() and EndDrawing()
-            // ...
-            // ...
+            //Draw code between BeginDrawing() and EndDrawing()
             ClearBackground(WHITE);
             DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
             DrawTexture(myTexture, 10, 100, WHITE);
@@ -37,9 +31,7 @@ int main() {
         EndDrawing();
     } // Main game loop end
 
-    // De-initialization here
-    // ...
-    // ...
+    //De-initialization code here
     UnloadTexture(myTexture);
 
     // Close window and OpenGL context
