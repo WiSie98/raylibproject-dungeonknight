@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp "core/headerfiles/header.h")
+add_executable(${PROJECT_NAME} main.cpp "core/headerfiles/header.h" "core/headerfiles/container.h" "core/container.tpp" "core/headerfiles/scene.h" "core/headerfiles/scene_manager.h" "core/scene_manager.cpp" "core/scene.cpp" "scenes/headerfiles/main_menu_scene.h" "scenes/headerfiles/start_scene.h" "scenes/start_scene.cpp" "scenes/main_menu_scene.cpp" "scenes/headerfiles/scenes.h" "core/headerfiles/initialization.h")
 
 # Add config.h.in file
 configure_file(config.h.in config.h)

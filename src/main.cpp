@@ -4,6 +4,8 @@
 #include "config.h"
 
 #include "core/headerfiles/header.h"
+#include "scenes/headerfiles/scenes.h"
+#include "core/headerfiles/scene_manager.h"
 
 int main() {
     // Raylib initialization
@@ -20,18 +22,24 @@ int main() {
 #endif
 
     //Initialization code here
-    Texture2D myTexture = LoadTexture("assets/graphics/testimage.png");
+
+    #include "core/headerfiles/initialization.h"
+    std::shared_ptr<StartScene> startScene = std::make_shared<StartScene>();
+
+    SceneManager sceneManager(startScene);
+    GenerateScenes(sceneManager.scenes);
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
         //Update code here
+        sceneManager.switchToScene(sceneManager.getCurrentScene()->setNextScene());
+        sceneManager.update();
 
         BeginDrawing();
             //Draw code between BeginDrawing() and EndDrawing()
             ClearBackground(WHITE);
-            DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
-            DrawTexture(myTexture, 10, 100, WHITE);
+            sceneManager.draw();
 
         EndDrawing();
 
