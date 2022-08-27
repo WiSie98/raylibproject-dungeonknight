@@ -22,8 +22,6 @@ int main() {
 #endif
 
     //Initialization code here
-
-    #include "core/headerfiles/initialization.h"
     std::shared_ptr<StartScene> startScene = std::make_shared<StartScene>();
 
     SceneManager sceneManager(startScene);
@@ -47,7 +45,7 @@ int main() {
     } // Main game loop end
 
     //De-initialization code here
-    UnloadTexture(myTexture);
+    //UnloadTexture(myTexture);
 
     // Close window and OpenGL context
     CloseWindow();
