@@ -10,9 +10,9 @@ public:
 
 	~StartScene();
 
-	void update() override;
-	void draw() override;
-	SceneType setNextScene() override;
+	void update(Player& player, Camera2D& camera) override;
+	void draw(Player& player, Camera2D& camera) override;
+	SceneType setNextScene(Player& player) override;
 
 private:
 

@@ -1,12 +1,32 @@
 #include "headerfiles/actor_player.h"
 
+Player::Player(float health, float shield, float stamina, float traverse_speed, float position_x, float position_y, Texture2D texture) {
+	setHealth(health);
+	setShield(shield);
+	setStamina(stamina);
+	setTraverseSpeed(traverse_speed);
+	setCurrentPosition(position_x, position_y);
+	setLastPosition(position_x, position_y);
+	setTexture(texture);
+}
 
 void Player::update() {
-
+	if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
+		this->current_position.y = this->current_position.y - this->traverse_speed;
+	}
+	if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
+		this->current_position.x = this->current_position.x + this->traverse_speed;
+	}
+	if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
+		this->current_position.y = this->current_position.y + this->traverse_speed;
+	}
+	if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
+		this->current_position.x = this->current_position.x - this->traverse_speed;
+	}
 }
 
 void Player::draw() {
-
+	DrawTexture(this->texture, this->current_position.x, this->current_position.y, WHITE);
 }
 
 void Player::removeDedicatedWeapon(int slot_num) {

@@ -6,7 +6,7 @@ StartScene::StartScene() {
 
 StartScene::~StartScene() {}
 
-void StartScene::update() {
+void StartScene::update(Player& player, Camera2D& camera) {
     if (state == 0) {
         framesCounter++;
 
@@ -49,7 +49,7 @@ void StartScene::update() {
     }
 }
 
-void StartScene::draw() {
+void StartScene::draw(Player& player, Camera2D& camera) {
     if (state == 0) {
         if ((framesCounter / 15) % 2) DrawRectangle(logoPositionX, logoPositionY, 16, 16, BLACK);
     }
@@ -77,7 +77,7 @@ void StartScene::draw() {
     }
 }
 
-SceneType StartScene::setNextScene() {
+SceneType StartScene::setNextScene(Player& player) {
 	if (is_finished || IsKeyPressed(KEY_SPACE)) {
 
         is_finished = false;

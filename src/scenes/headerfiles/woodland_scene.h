@@ -10,14 +10,14 @@ public:
 
 	~WoodlandScene();
 
-	void update() override;
-	void draw() override;
+	void update(Player& player, Camera2D& camera) override;
+	void draw(Player& player, Camera2D& camera) override;
 
 	void parseLevelBackgroundTiles(std::vector<std::shared_ptr<LevelTile>>& woodland_tiles_vector, nlohmann::json& tileset_description, nlohmann::json& level_map);
 	void parseLevelForegroundTiles(std::vector<std::shared_ptr<LevelTile>>& woodland_tiles_vector, nlohmann::json& tileset_description, nlohmann::json& level_map);
 	void parseLevelCollider(std::vector<std::shared_ptr<ColliderTile>>& woodland_tiles_collider_vector, nlohmann::json& tileset_description, nlohmann::json& level_map);
 
-	SceneType setNextScene() override;
+	SceneType setNextScene(Player& player) override;
 
 private:
 

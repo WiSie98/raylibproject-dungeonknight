@@ -6,14 +6,14 @@
 class SceneManager final {
 public:
 
-	SceneManager(std::shared_ptr<Scene>);
+	SceneManager();
 
 	virtual ~SceneManager() = default;
 
 	void switchToScene(SceneType scene_type);
 
-	void update();
-	void draw();
+	void update(Player& player, Camera2D& camera);
+	void draw(Player& player, Camera2D& camera);
 
 	std::shared_ptr<Scene> getCurrentScene();
 	std::vector<std::shared_ptr<Scene>>& getScenes();

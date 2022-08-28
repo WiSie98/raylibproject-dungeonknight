@@ -1,6 +1,6 @@
 #include "headerfiles/scene_manager.h"
 
-SceneManager::SceneManager(std::shared_ptr<Scene> scene) : current_scene(scene) {}
+SceneManager::SceneManager() {}
 
 //---------------------------Functions---------------------------------
 
@@ -12,12 +12,12 @@ void SceneManager::switchToScene(SceneType scene_type) {
 	}
 }
 
-void SceneManager::update() {
-	this->current_scene->update();
+void SceneManager::update(Player& player, Camera2D& camera) {
+	this->current_scene->update(player, camera);
 }
 
-void SceneManager::draw() {
-	this->current_scene->draw();
+void SceneManager::draw(Player& player, Camera2D& camera) {
+	this->current_scene->draw(player, camera);
 }
 
 //----------------------------Getter----------------------------------

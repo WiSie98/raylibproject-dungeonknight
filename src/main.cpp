@@ -6,6 +6,7 @@
 #include "core/headerfiles/header.h"
 #include "scenes/headerfiles/scenes.h"
 #include "core/headerfiles/scene_manager.h"
+#include "actors/headerfiles/actor_player.h"
 
 int main() {
     // Raylib initialization
@@ -22,22 +23,27 @@ int main() {
 #endif
 
     //Initialization code here
-    std::shared_ptr<StartScene> startScene = std::make_shared<StartScene>();
+    Texture2D player_texture = LoadTexture("assets/graphics/sprites/dk_spt_player.png");
 
-    SceneManager sceneManager(startScene);
+    SceneManager sceneManager;
     GenerateScenes(sceneManager.getScenes());
+    sceneManager.switchToScene(START_SCENE);
+
+    Player player(100, 100, 100, 5, 0, 0, player_texture);
+    Camera2D playerCamera;
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
         //Update code here
-        sceneManager.switchToScene(sceneManager.getCurrentScene()->setNextScene());
-        sceneManager.update();
+        sceneManager.switchToScene(sceneManager.getCurrentScene()->setNextScene(player));
+        sceneManager.update(player, playerCamera);
 
         BeginDrawing();
             //Draw code between BeginDrawing() and EndDrawing()
             ClearBackground(WHITE);
-            sceneManager.draw();
+
+            sceneManager.draw(player, playerCamera);
 
         EndDrawing();
 
@@ -45,7 +51,7 @@ int main() {
     } // Main game loop end
 
     //De-initialization code here
-    //UnloadTexture(myTexture);
+    UnloadTexture(player_texture);
 
     // Close window and OpenGL context
     CloseWindow();

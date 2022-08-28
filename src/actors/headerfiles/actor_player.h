@@ -9,6 +9,10 @@
 class Player final : public ActorBase {
 public:
 
+	Player(float health, float shield, float stamina, float traverse_speed, float position_x, float position_y, Texture2D texture);
+
+	~Player() {}
+
 	void update() override;
 	void draw() override;
 
@@ -42,8 +46,8 @@ private:
 	std::shared_ptr<ItemBase> dedicated_item_slot4;
 	std::shared_ptr<ItemBase> dedicated_item_slot5;
 
-	Container<std::shared_ptr<ItemBase>> weapon_inventory;
-	Container<std::shared_ptr<ItemBase>> item_inventory;
+	//Container<std::shared_ptr<ItemBase>> weapon_inventory;
+	//Container<std::shared_ptr<ItemBase>> item_inventory;
 
 protected:
 
