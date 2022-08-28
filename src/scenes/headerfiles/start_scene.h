@@ -18,8 +18,8 @@ private:
 
     bool is_finished = false;
 
-    int logoPositionX = 960 / 2 - 128;
-    int logoPositionY = 540 / 2 - 128;
+    int logoPositionX = GetScreenWidth() / 2 - 128;
+    int logoPositionY = GetScreenHeight() / 2 - 128;
 
     int framesCounter = 0;
     int lettersCount = 0;

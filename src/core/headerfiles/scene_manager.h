@@ -6,8 +6,6 @@
 class SceneManager final {
 public:
 
-	std::vector<std::shared_ptr<Scene>> scenes;
-
 	SceneManager(std::shared_ptr<Scene>);
 
 	virtual ~SceneManager() = default;
@@ -18,9 +16,11 @@ public:
 	void draw();
 
 	std::shared_ptr<Scene> getCurrentScene();
+	std::vector<std::shared_ptr<Scene>>& getScenes();
 
 private:
 
 	std::shared_ptr<Scene> current_scene;
+	std::vector<std::shared_ptr<Scene>> scenes;
 
 };

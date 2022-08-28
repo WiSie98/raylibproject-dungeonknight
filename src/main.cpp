@@ -25,7 +25,7 @@ int main() {
     std::shared_ptr<StartScene> startScene = std::make_shared<StartScene>();
 
     SceneManager sceneManager(startScene);
-    GenerateScenes(sceneManager.scenes);
+    GenerateScenes(sceneManager.getScenes());
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key

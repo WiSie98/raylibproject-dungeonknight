@@ -2,13 +2,13 @@
 
 include(../cmake/raylib.cmake)
 
-project(game VERSION 0.1 LANGUAGES CXX)
+project(Dungeon_Knight VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp "core/headerfiles/header.h" "core/headerfiles/container.h" "core/container.cpp" "core/headerfiles/scene.h" "core/headerfiles/scene_manager.h" "core/scene_manager.cpp" "core/scene.cpp" "scenes/headerfiles/main_menu_scene.h" "scenes/headerfiles/start_scene.h" "scenes/start_scene.cpp" "scenes/main_menu_scene.cpp" "scenes/headerfiles/scenes.h" "core/headerfiles/actor_base.h" "core/actor_base.cpp" "core/headerfiles/item_base.h" "core/item_base.cpp" "actors/headerfiles/actor_player.h" "actors/actor_player.cpp")
+add_executable(${PROJECT_NAME} main.cpp "core/headerfiles/header.h" "core/headerfiles/container.h" "core/container.cpp" "core/headerfiles/scene.h" "core/headerfiles/scene_manager.h" "core/scene_manager.cpp" "core/scene.cpp" "scenes/headerfiles/main_menu_scene.h" "scenes/headerfiles/start_scene.h" "scenes/start_scene.cpp" "scenes/main_menu_scene.cpp" "scenes/headerfiles/scenes.h" "core/headerfiles/actor_base.h" "core/actor_base.cpp" "core/headerfiles/item_base.h" "core/item_base.cpp" "actors/headerfiles/actor_player.h" "actors/actor_player.cpp" "scenes/headerfiles/woodland_scene.h" "scenes/woodland_scene.cpp")
 
 # Add config.h.in file
 configure_file(config.h.in config.h)

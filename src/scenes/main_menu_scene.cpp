@@ -15,8 +15,12 @@ void MainMenuScene::draw() {
 }
 
 SceneType MainMenuScene::setNextScene() {
-	if (IsKeyPressed(KEY_ENTER)) {
+	if (IsKeyPressed(KEY_BACKSPACE)) {
 		return START_SCENE;
 	}
+	else if (IsKeyPressed(KEY_ENTER)) {
+		return WOODLAND_SCENE;
+	}
+
 	return MAIN_MENU_SCENE;
 }
