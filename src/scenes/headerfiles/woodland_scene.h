@@ -13,9 +13,11 @@ public:
 	void update(Player& player, Camera2D& camera) override;
 	void draw(Player& player, Camera2D& camera) override;
 
-	void parseLevelBackgroundTiles(std::vector<std::shared_ptr<LevelTile>>& woodland_tiles_vector, nlohmann::json& tileset_description, nlohmann::json& level_map);
-	void parseLevelForegroundTiles(std::vector<std::shared_ptr<LevelTile>>& woodland_tiles_vector, nlohmann::json& tileset_description, nlohmann::json& level_map);
-	void parseLevelCollider(std::vector<std::shared_ptr<ColliderTile>>& woodland_tiles_collider_vector, nlohmann::json& tileset_description, nlohmann::json& level_map);
+	void parseLevelBackgroundTiles(nlohmann::json& tileset_description, nlohmann::json& level_map);
+	void parseLevelForegroundTiles(nlohmann::json& tileset_description, nlohmann::json& level_map);
+	void parseLevelCollider(nlohmann::json& tileset_description, nlohmann::json& level_map);
+
+	void detectCollision(Player& player);
 
 	SceneType setNextScene(Player& player) override;
 
