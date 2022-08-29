@@ -30,7 +30,12 @@ int main() {
     sceneManager.switchToScene(START_SCENE);
 
     Player player(100, 100, 100, 5, 0, 0, player_texture);
+
     Camera2D playerCamera;
+    playerCamera.offset.x = GetScreenWidth() / 2;
+    playerCamera.offset.y = GetScreenHeight() / 2;
+    playerCamera.zoom = 3.0f;
+    playerCamera.rotation = 0;
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -38,6 +43,8 @@ int main() {
         //Update code here
         sceneManager.switchToScene(sceneManager.getCurrentScene()->setNextScene(player));
         sceneManager.update(player, playerCamera);
+
+        playerCamera.target = player.getCurrentPosition();
 
         BeginDrawing();
             //Draw code between BeginDrawing() and EndDrawing()

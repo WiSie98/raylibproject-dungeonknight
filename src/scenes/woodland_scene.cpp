@@ -30,6 +30,7 @@ void WoodlandScene::update(Player& player, Camera2D& camera) {
 
 void WoodlandScene::draw(Player& player, Camera2D& camera) {
 	//DrawText("Woodland scene", 10, 10, 30, LIGHTGRAY);
+    BeginMode2D(camera);
     for (const auto& tile : this->woodland_tiles_background_vector) {
         DrawTextureRec(this->tile_atlas_texture, tile->spritesheet_position, tile->position_on_screen, WHITE);
     }
@@ -37,13 +38,10 @@ void WoodlandScene::draw(Player& player, Camera2D& camera) {
     //Everything that is not part of the map schould be rendered here.
     player.draw();
 
-    BeginMode2D(camera);
-
-    EndMode2D();
-
     for (const auto& tile : this->woodland_tiles_foreground_vector) {
         DrawTextureRec(this->tile_atlas_texture, tile->spritesheet_position, tile->position_on_screen, WHITE);
     }
+    EndMode2D();
 }
 
 void WoodlandScene::parseLevelBackgroundTiles(std::vector<std::shared_ptr<LevelTile>>& woodland_tiles_vector, nlohmann::json& tileset_description, nlohmann::json& level_map) {
@@ -128,7 +126,7 @@ void WoodlandScene::parseLevelCollider(std::vector<std::shared_ptr<ColliderTile>
 
 SceneType WoodlandScene::setNextScene(Player& player) {
 	if (IsKeyPressed(KEY_ENTER)) {
-        player.setCurrentPosition(0, 0);
+        player.setCurrentPosition(2048, 2048);
 		return MAIN_MENU_SCENE;
 	}
 	return WOODLAND_SCENE;

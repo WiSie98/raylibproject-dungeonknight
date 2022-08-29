@@ -23,6 +23,7 @@ SceneType MainMenuScene::setNextScene(Player& player) {
 		return START_SCENE;
 	}
 	else if (IsKeyPressed(KEY_ENTER)) {
+		player.setCurrentPosition(2048, 2048);
 		return WOODLAND_SCENE;
 	}
 
