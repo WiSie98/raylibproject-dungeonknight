@@ -58,6 +58,9 @@ void WoodlandScene::parseLevelBackgroundTiles(nlohmann::json& tileset_descriptio
                     if (tileId != 0) {
                         rec.x = (float)((int)tileId - 1 % (int)tileset_description["columns"]) * (float)level_map["tilewidth"];
                         rec.y = (float)floor((float)tileId / (float)tileset_description["columns"]) * (float)level_map["tilewidth"];
+                        if (tileId % 32 == 0) {
+                            rec.y -= 16;
+                        }
 
                         std::shared_ptr<LevelTile> tile = std::make_shared<LevelTile>();
                         tile->position_on_screen = vec;
@@ -94,6 +97,9 @@ void WoodlandScene::parseLevelForegroundTiles(nlohmann::json& tileset_descriptio
                     if (tileId != 0) {
                         rec.x = (float)((int)tileId - 1 % (int)tileset_description["columns"]) * (float)level_map["tilewidth"];
                         rec.y = (float)floor((float)tileId / (float)tileset_description["columns"]) * (float)level_map["tilewidth"];
+                        if (tileId % 32 == 0) {
+                            rec.y -= 16;
+                        }
 
                         std::shared_ptr<LevelTile> tile = std::make_shared<LevelTile>();
                         tile->position_on_screen = vec;
