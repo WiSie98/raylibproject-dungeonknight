@@ -54,7 +54,12 @@ int main() {
 
         EndDrawing();
 
-        frame_counter++;
+        if (frame_counter >= target_fps - 1) {
+            frame_counter = 0;
+        }
+        else {
+            frame_counter++;
+        }
     } // Main game loop end
 
     //De-initialization code here
