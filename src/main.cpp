@@ -32,8 +32,8 @@ int main() {
     Player player(100, 100, 100, 5, 0, 0, player_texture);
 
     Camera2D playerCamera;
-    playerCamera.offset.x = GetScreenWidth() / 2;
-    playerCamera.offset.y = GetScreenHeight() / 2;
+    playerCamera.offset.x = (float)GetScreenWidth() / 2;
+    playerCamera.offset.y = (float)GetScreenHeight() / 2;
     playerCamera.zoom = 3.0f;
     playerCamera.rotation = 0;
 

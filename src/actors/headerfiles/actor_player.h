@@ -5,6 +5,7 @@
 #include "..\..\core\headerfiles\actor_base.h"
 #include "..\..\core\headerfiles\container.h"
 #include "..\..\core\headerfiles\item_base.h"
+#include "..\..\core\headerfiles\animation.h"
 
 class Player final : public ActorBase {
 public:
@@ -36,6 +37,9 @@ private:
 	int money;
 	float shield;
 	float stamina;
+	bool isKeyPressed;
+
+	Animation animation;
 
 	std::shared_ptr<ItemBase> dedicated_weapon_slot1;
 	std::shared_ptr<ItemBase> dedicated_weapon_slot2;

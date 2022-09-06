@@ -1,19 +1,17 @@
 #include "headerfiles/animation.h"
 
-Animation::Animation(int frame_speed, float frame_width, float frame_height, Texture2D& spritesheet) : frame_speed(frame_speed), frame_counter(0), current_frame(0), spritesheet(spritesheet), state(NONE) {
-	this->spritesheet_rectangle.x = 0;
-	this->spritesheet_rectangle.y = 0;
-	this->spritesheet_rectangle.width = frame_width;
-	this->spritesheet_rectangle.height = frame_height;
+Animation::Animation(int frame_speed, float frame_width, float frame_height, Texture2D& spritesheet) : frame_speed(frame_speed), frame_counter(0), current_frame(0), spritesheet(spritesheet), current_state(NONE), last_state(STANDING_DOWN) {
+	setSpritesheetRectangle(0, 0, frame_width, frame_height);
 }
 
 Animation::~Animation() {}
 
 void Animation::update(AnimationState state) {
-	if (this->state != state) {
+	if (this->current_state != state) {
 		this->frame_counter = 0;
 		this->current_frame = 0;
-		this->state = state;
+		this->last_state = current_state;
+		this->current_state = state;
 	}
 	this->frame_counter++;
 
@@ -25,52 +23,109 @@ void Animation::update(AnimationState state) {
 			this->current_frame = 0;
 		}
 	}
-	this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+	//this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+
+	if (this->current_state == NONE) {
+		if (this->last_state == WALKING_UP || this->last_state == STANDING_UP) {
+			this->current_state = STANDING_UP;
+		}
+		else if (this->last_state == WALKING_DOWN || this->last_state == STANDING_DOWN) {
+			this->current_state = STANDING_DOWN;
+		}
+		else if (this->last_state == WALKING_LEFT || this->last_state == STANDING_LEFT) {
+			this->current_state = STANDING_LEFT;
+		}
+		else if (this->last_state == WALKING_RIGHT || this->last_state == STANDING_RIGHT) {
+			this->current_state = STANDING_RIGHT;
+		}
+		else {
+			this->current_state = STANDING_DOWN;
+		}
+	}
+	std::cout << this->current_state << "\n";
 }
 
 void Animation::draw(Vector2& position) {
-	if (this->state == STANDING_UP || this->state == STANDING_DOWN || this->state == STANDING_LEFT || this->state == STANDING_RIGHT) {
+	if (this->current_state == STANDING_UP || this->current_state == STANDING_DOWN || this->current_state == STANDING_LEFT || this->current_state == STANDING_RIGHT) {
 		drawStanding(position);
 	}
-	else if (this->state == WALKING_UP || this->state == WALKING_DOWN || this->state == WALKING_LEFT || this->state == WALKING_RIGHT) {
+	else if (this->current_state == WALKING_UP || this->current_state == WALKING_DOWN || this->current_state == WALKING_LEFT || this->current_state == WALKING_RIGHT) {
 		drawWalking(position);
 	}
-	else if (this->state == ATTACKING) {
+	else if (this->current_state == ATTACKING) {
 		drawAttaking(position);
 	}
-	else if (this->state == DAMAGE) {
+	else if (this->current_state == DAMAGE) {
 		drawDamage(position);
 	}
-	else if (this->state == DYING) {
+	else if (this->current_state == DYING) {
 		drawDying(position);
 	}
-	else if (this->state == SPAWNING) {
+	else if (this->current_state == SPAWNING) {
 		drawSpawning(position);
 	}
 }
 
 void Animation::drawStanding(Vector2& position) {
-	DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	if (this->current_state == STANDING_UP) {
+		this->spritesheet_rectangle.x = 0;
+		this->spritesheet_rectangle.y = 0;
+		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	}
+	else if (this->current_state == STANDING_DOWN) {
+		this->spritesheet_rectangle.x = this->spritesheet_rectangle.width;
+		this->spritesheet_rectangle.y = 0;
+		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	}
+	else if (this->current_state == STANDING_LEFT) {
+		this->spritesheet_rectangle.x = this->spritesheet_rectangle.width * 2;
+		this->spritesheet_rectangle.y = 0;
+		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	}
+	else if (this->current_state == STANDING_RIGHT) {
+		this->spritesheet_rectangle.x = this->spritesheet_rectangle.width * 3;
+		this->spritesheet_rectangle.y = 0;
+		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	}
 }
 
 void Animation::drawWalking(Vector2& position) {
-	DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	if (this->current_state == WALKING_UP) {
+		this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+		this->spritesheet_rectangle.y = this->spritesheet_rectangle.height;
+		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	}
+	else if (this->current_state == WALKING_DOWN) {
+		this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+		this->spritesheet_rectangle.y = this->spritesheet_rectangle.height * 2;
+		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	}
+	else if (this->current_state == WALKING_LEFT) {
+		this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+		this->spritesheet_rectangle.y = this->spritesheet_rectangle.height * 3;
+		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	}
+	else if (this->current_state == WALKING_RIGHT) {
+		this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+		this->spritesheet_rectangle.y = this->spritesheet_rectangle.height * 4;
+		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	}
 }
 
 void Animation::drawAttaking(Vector2& position) {
-	DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	//DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
 }
 
 void Animation::drawDamage(Vector2& position) {
-	DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	//DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
 }
 
 void Animation::drawDying(Vector2& position) {
-	DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	//DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
 }
 
 void Animation::drawSpawning(Vector2& position) {
-	DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
+	//DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
 }
 
 //----------------------------Setter----------------------------------
@@ -102,8 +157,12 @@ void Animation::setSpritesheetRectangle(Rectangle spritesheet_rectangle) {
 	this->spritesheet_rectangle = spritesheet_rectangle;
 }
 
-void Animation::setState(AnimationState state) {
-	this->state = state;
+void Animation::setCurrentState(AnimationState current_state) {
+	this->current_state = current_state;
+}
+
+void Animation::setLastState(AnimationState last_state) {
+	this->last_state = last_state;
 }
 
 //----------------------------Getter----------------------------------
@@ -128,6 +187,10 @@ Rectangle Animation::getSpritesheetRectangle() {
 	return this->spritesheet_rectangle;
 }
 
-AnimationState Animation::getState() {
-	return this->state;
+AnimationState Animation::getCurrentState() {
+	return this->current_state;
+}
+
+AnimationState Animation::getLastState() {
+	return this->last_state;
 }

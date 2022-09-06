@@ -25,14 +25,16 @@ public:
 	void setSpritesheet(Texture2D spritesheet);
 	void setSpritesheetRectangle(float x, float y, float width, float height);
 	void setSpritesheetRectangle(Rectangle spritesheet_rectangle);
-	void setState(AnimationState state);
+	void setCurrentState(AnimationState current_state);
+	void setLastState(AnimationState last_state);
 
 	int getFrameSpeed();
 	int getFrameCounter();
 	int getCurrentFrame();
 	Texture2D getSpritesheet();
 	Rectangle getSpritesheetRectangle();
-	AnimationState getState();
+	AnimationState getCurrentState();
+	AnimationState getLastState();
 
 private:
 
@@ -41,7 +43,8 @@ private:
 	int current_frame;
 	Texture2D spritesheet;
 	Rectangle spritesheet_rectangle;
-	AnimationState state;
+	AnimationState current_state;
+	AnimationState last_state;
 
 protected:
 
