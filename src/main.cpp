@@ -16,6 +16,7 @@ int main() {
     unsigned int frame_counter = 0;
 
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
+    InitAudioDevice();
     SetTargetFPS(target_fps);
 
 #ifdef GAME_START_FULLSCREEN
@@ -66,6 +67,7 @@ int main() {
     UnloadTexture(player_texture);
 
     // Close window and OpenGL context
+    CloseAudioDevice();
     CloseWindow();
 
     return EXIT_SUCCESS;

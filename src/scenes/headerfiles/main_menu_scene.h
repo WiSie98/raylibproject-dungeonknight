@@ -2,6 +2,7 @@
 
 #include "..\..\core\headerfiles\header.h"
 #include "..\..\core\headerfiles\scene.h"
+#include "..\..\ui\headerfiles\ui_button.h"
 
 class MainMenuScene final : public Scene {
 public:
@@ -17,5 +18,9 @@ public:
 private:
 	
 	Texture2D logo;
+	Texture2D ui_buttons;
 
+	Button start_button;
+	//Button options_button;
+	//Button quit_button;
 };
