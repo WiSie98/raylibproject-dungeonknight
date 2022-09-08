@@ -42,7 +42,6 @@ void Animation::update(AnimationState state) {
 			this->current_state = STANDING_DOWN;
 		}
 	}
-	std::cout << this->current_state << "\n";
 }
 
 void Animation::draw(Vector2& position) {

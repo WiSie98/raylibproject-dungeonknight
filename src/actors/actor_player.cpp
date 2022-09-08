@@ -1,6 +1,6 @@
 #include "headerfiles/actor_player.h"
 
-Player::Player(float health, float shield, float stamina, float traverse_speed, float position_x, float position_y, Texture2D texture) : animation(8, 16, 16, texture) {
+Player::Player(float health, float shield, float stamina, float traverse_speed, float position_x, float position_y, Texture2D texture) : animation(32, 16, 16, texture) {
 	setHealth(health);
 	setShield(shield);
 	setStamina(stamina);
@@ -19,7 +19,9 @@ void Player::update() {
 	}
 	if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
 		this->current_position.x = this->current_position.x + this->traverse_speed;
-		this->animation.update(WALKING_RIGHT);
+		if (!(IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) && !(IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))) {
+			this->animation.update(WALKING_RIGHT);
+		}
 		this->isKeyPressed = true;
 	}
 	if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
@@ -29,7 +31,9 @@ void Player::update() {
 	}
 	if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
 		this->current_position.x = this->current_position.x - this->traverse_speed;
-		this->animation.update(WALKING_LEFT);
+		if (!(IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) && !(IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))) {
+			this->animation.update(WALKING_LEFT);
+		}
 		this->isKeyPressed = true;
 	}
 	if (this->isKeyPressed == false) {
