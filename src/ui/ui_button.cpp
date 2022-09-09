@@ -1,27 +1,31 @@
 #include "headerfiles/ui_button.h"
 
-Button::Button(Texture2D spritesheet, Rectangle spritesheet_source, float spritesheet_destination_x, float spritesheet_destination_y, float scale, std::string button_text) {
+Button::Button(Texture2D spritesheet, Rectangle spritesheet_source, float spritesheet_destination_x, float spritesheet_destination_y, float scale, std::string button_text, ButtonType button_type) {
 	setSpritesheet(spritesheet);
 	setOrigin(spritesheet_source.width, spritesheet_source.height);
 	setSpritesheetSource(spritesheet_source);
 	setSpritesheetDestination(spritesheet_destination_x, spritesheet_destination_y, spritesheet_source.width * scale, spritesheet_source.height * scale);
 	setIsButtonAction(false);
 	setCurrentState(IDLE);
-	setButtonBounds(spritesheet_destination_x - ((spritesheet_source.width * scale) / scale), spritesheet_destination_y - ((spritesheet_source.height * scale) / scale), spritesheet_source.width * scale, spritesheet_source.height * scale);
+	setButtonBounds(spritesheet_destination_x, spritesheet_destination_y, spritesheet_source.width * scale, spritesheet_source.height * scale);
 	setButtonText(button_text);
 	setTextPosition(spritesheet_destination_x, spritesheet_destination_y);
+	setScale(scale);
+	setButtonType(button_type);
 }
 
-Button::Button(Texture2D spritesheet, float spritesheet_source_x, float spritesheet_source_y, float spritesheet_source_width, float spritesheet_source_height, float spritesheet_destination_x, float spritesheet_destination_y, float scale, std::string button_text) {
+Button::Button(Texture2D spritesheet, float spritesheet_source_x, float spritesheet_source_y, float spritesheet_source_width, float spritesheet_source_height, float spritesheet_destination_x, float spritesheet_destination_y, float scale, std::string button_text, ButtonType button_type) {
 	setSpritesheet(spritesheet);
 	setOrigin(spritesheet_source_width, spritesheet_source_height);
 	setSpritesheetSource(spritesheet_source_x, spritesheet_source_y, spritesheet_source_width, spritesheet_source_height);
 	setSpritesheetDestination(spritesheet_destination_x, spritesheet_destination_y, spritesheet_source_width * scale, spritesheet_source_height * scale);
 	setIsButtonAction(false);
 	setCurrentState(IDLE);
-	setButtonBounds(spritesheet_destination_x - ((spritesheet_source_width * scale) / scale), spritesheet_destination_y - ((spritesheet_source_height * scale) / scale), spritesheet_source_width * scale, spritesheet_source_height * scale);
+	setButtonBounds(spritesheet_destination_x, spritesheet_destination_y, spritesheet_source_width * scale, spritesheet_source_height * scale);
 	setButtonText(button_text);
 	setTextPosition(spritesheet_destination_x, spritesheet_destination_y);
+	setScale(scale);
+	setButtonType(button_type);
 }
 
 Button::~Button() {}
@@ -52,16 +56,20 @@ void Button::update() {
 }
 
 void Button::draw() {
-	DrawTexturePro(this->spritesheet, this->spritesheet_source, this->spritesheet_destination, this->origin, 0, WHITE);
+	DrawTexturePro(this->spritesheet, this->spritesheet_source, this->spritesheet_destination, Vector2{0, 0}, 0, WHITE);
 	if (this->current_state == PRESSED) {
-		DrawTextPro(GetFontDefault(), this->button_text.c_str(), this->text_position, { (float)((this->button_text.length() * 23) / 4), 11 - 2}, 0, 20, 2, BLACK);
+		DrawTextPro(GetFontDefault(), this->button_text.c_str(), this->text_position, Vector2{ (-this->spritesheet_source.width + ((this->button_text.length() * 12) - 2) / 2), ((-this->spritesheet_source.height / 2) - (2 * this->scale)) }, 0, 11 * this->scale, 1 * this->scale, BLACK);
 	}
 	else {
-		DrawTextPro(GetFontDefault(), this->button_text.c_str(), this->text_position, { (float)((this->button_text.length() * 23) / 4), 11 }, 0, 20, 2, BLACK);
+		DrawTextPro(GetFontDefault(), this->button_text.c_str(), this->text_position, Vector2{ (-this->spritesheet_source.width + ((this->button_text.length() * 12) - 2) / 2), (-this->spritesheet_source.height / 2) }, 0, 11 * this->scale, 1 * this->scale, BLACK);
 	}
 }
 
 //----------------------------Setter----------------------------------
+
+void Button::setScale(float scale) {
+	this->scale = scale;
+}
 
 void Button::setIsButtonAction(bool isButtonAction) {
 	this->isButtonAction = isButtonAction;
@@ -91,11 +99,20 @@ void Button::setCurrentState(ButtonState current_state) {
 	this->current_state = current_state;
 }
 
+void Button::setButtonType(ButtonType button_type) {
+	this->button_type = button_type;
+}
+
+
 void Button::setButtonText(std::string button_text) {
 	this->button_text = button_text;
 }
 
 //----------------------------Getter----------------------------------
+
+float Button::getScale() {
+	return this->scale;
+}
 
 bool Button::getIsButtonAction() {
 	return this->isButtonAction;
@@ -111,6 +128,10 @@ Rectangle Button::getButtonBounds() {
 
 ButtonState Button::getCurrentState() {
 	return this->current_state;
+}
+
+ButtonType Button::getButtonType() {
+	return this->button_type;
 }
 
 std::string Button::getButtonText() {

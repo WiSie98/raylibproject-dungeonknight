@@ -174,7 +174,7 @@ void WoodlandScene::detectCollision(Player& player) {
 
 //----------------------------Setter----------------------------------
 
-SceneType WoodlandScene::setNextScene(Player& player) {
+SceneType WoodlandScene::setNextScene(Player& player, bool& exitWindowRequested) {
 	if (IsKeyPressed(KEY_ENTER)) {
         player.setCurrentPosition(2048, 2048);
 		return MAIN_MENU_SCENE;

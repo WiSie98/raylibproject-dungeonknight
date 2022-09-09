@@ -77,7 +77,7 @@ void StartScene::draw(Player& player, Camera2D& camera) {
     }
 }
 
-SceneType StartScene::setNextScene(Player& player) {
+SceneType StartScene::setNextScene(Player& player, bool& exitWindowRequested) {
 	if (is_finished || IsKeyPressed(KEY_SPACE)) {
 
         is_finished = false;

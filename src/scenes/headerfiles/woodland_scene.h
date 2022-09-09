@@ -19,7 +19,7 @@ public:
 
 	void detectCollision(Player& player);
 
-	SceneType setNextScene(Player& player) override;
+	SceneType setNextScene(Player& player, bool& exitWindowRequested) override;
 
 private:
 

@@ -1,7 +1,7 @@
 #pragma once
 
 namespace Game {
-    inline constexpr const char* PROJECT_NAME = "@PROJECT_NAME@";
+    inline constexpr const char* PROJECT_NAME = "Dungeon Knight";
     inline constexpr const char* PROJECT_VERSION = "@PROJECT_VERSION@";
     inline constexpr const char* PROJECT_VERSION_MAJOR = "@PROJECT_VERSION_MAJOR@";
     inline constexpr const char* PROJECT_VERSION_MINOR = "@PROJECT_VERSION_MINOR@";

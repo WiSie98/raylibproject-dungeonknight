@@ -12,12 +12,14 @@ int main() {
     // Raylib initialization
     // Project name, screen size, fullscreen mode etc. can be specified in the config.h.in file
     
-    unsigned int target_fps = 60;
-    unsigned int frame_counter = 0;
+	unsigned int target_fps = 60;       // Flag to set the Target FPS
+    bool exitWindowRequested = false;   // Flag to request window to exit
+    bool exitWindow = false;            // Flag to set window to exit
 
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     InitAudioDevice();
     SetTargetFPS(target_fps);
+    SetExitKey(KEY_F4);
 
 #ifdef GAME_START_FULLSCREEN
     ToggleFullscreen();
@@ -39,10 +41,14 @@ int main() {
     playerCamera.rotation = 0;
 
     // Main game loop
-    while (!WindowShouldClose()) // Detect window close button or ESC key
+    while (!exitWindow) // Detect window close button or ESC key
     {
         //Update code here
-        sceneManager.switchToScene(sceneManager.getCurrentScene()->setNextScene(player));
+        if (WindowShouldClose() || exitWindowRequested) {
+			exitWindow = true;
+        }
+
+        sceneManager.switchToScene(sceneManager.getCurrentScene()->setNextScene(player, exitWindowRequested));
         sceneManager.update(player, playerCamera);
 
         playerCamera.target = player.getCurrentPosition();
@@ -55,12 +61,6 @@ int main() {
 
         EndDrawing();
 
-        if (frame_counter >= target_fps - 1) {
-            frame_counter = 0;
-        }
-        else {
-            frame_counter++;
-        }
     } // Main game loop end
 
     //De-initialization code here

@@ -1,10 +1,25 @@
 #include "headerfiles/main_menu_scene.h"
 
-MainMenuScene::MainMenuScene() : start_button(this->ui_buttons, 72, 0, 72, 24, (GetScreenWidth() / 2) - (72 / 2), (GetScreenHeight() / 2) + 100, 2, "Start") {
+MainMenuScene::MainMenuScene() {
 	setSceneType(MAIN_MENU_SCENE);
 	this->logo = LoadTexture("./assets/graphics/sprites/dk_spt_mainlogo.png");
 	this->ui_buttons = LoadTexture("./assets/graphics/spritesheets/dk_sptsht_ui_buttons.png");
-	this->start_button.setSpritesheet(this->ui_buttons);
+
+	Button start_button(this->ui_buttons, 72, 0, 72, 24, (GetScreenWidth() / 2) - ((72 * 4) / 2), (GetScreenHeight() / 2), 4, "Start", START_BUTTON);
+	start_button.setSpritesheet(this->ui_buttons);
+	this->button_vector.push_back(start_button);
+
+	Button resume_button(this->ui_buttons, 72, 0, 72, 24, (GetScreenWidth() / 2) - ((72 * 4) / 2), (GetScreenHeight() / 2) + 100, 4, "Resume", RESUME_BUTTON);
+	resume_button.setSpritesheet(this->ui_buttons);
+	this->button_vector.push_back(resume_button);
+
+	Button options_button(this->ui_buttons, 72, 0, 72, 24, (GetScreenWidth() / 2) - ((72 * 4) / 2), (GetScreenHeight() / 2) + 200, 4, "Options", OPTIONS_BUTTON);
+	options_button.setSpritesheet(this->ui_buttons);
+	this->button_vector.push_back(options_button);
+
+	Button exit_button(this->ui_buttons, 72, 0, 72, 24, (GetScreenWidth() / 2) - ((72 * 4) / 2), (GetScreenHeight() / 2) + 300, 4, "Exit", EXIT_BUTTON);
+	exit_button.setSpritesheet(this->ui_buttons);
+	this->button_vector.push_back(exit_button);
 }
 
 MainMenuScene::~MainMenuScene() {
@@ -13,23 +28,33 @@ MainMenuScene::~MainMenuScene() {
 }
 
 void MainMenuScene::update(Player& player, Camera2D& camera) {
-	this->start_button.update();
+	for (int i = 0; i < this->button_vector.size(); i++) {
+		this->button_vector[i].update();
+	}
 }
 
 void MainMenuScene::draw(Player& player, Camera2D& camera) {
-	DrawTexture(logo, (GetScreenWidth() / 2) - (logo.width / 2), (GetScreenHeight() / 2) - (logo.height / 2), WHITE);
-	DrawText("Press ENTER to Start", (GetScreenWidth() / 2) - 120, (GetScreenHeight() / 2) + 60, 20, BLACK);
-	this->start_button.draw();
+	DrawTexturePro(this->logo, Rectangle{ 0.0f, 0.0f, (float)this->logo.width, (float)this->logo.height }, Rectangle{ (float)(GetScreenWidth() / 2), (float)(GetScreenHeight() / 3), (float)this->logo.width * 2, (float)this->logo.height * 2 }, Vector2{ (float)this->logo.width, (float)this->logo.height }, 0, WHITE);
+	for (int i = 0; i < this->button_vector.size(); i++) {
+		this->button_vector[i].draw();
+	}
 }
 
-SceneType MainMenuScene::setNextScene(Player& player) {
+SceneType MainMenuScene::setNextScene(Player& player, bool& exitWindowRequested) {
+
+	for (int i = 0; i < this->button_vector.size(); i++) {
+		if (this->button_vector[i].getIsButtonAction()) {
+			if (this->button_vector[i].getButtonType() == START_BUTTON) {
+				player.setCurrentPosition(2048, 2048);
+				return WOODLAND_SCENE;
+			}
+			else if (this->button_vector[i].getButtonType() == EXIT_BUTTON) {
+				exitWindowRequested = true;
+			}
+		}
+	}
 	if (IsKeyPressed(KEY_BACKSPACE)) {
 		return START_SCENE;
 	}
-	else if (IsKeyPressed(KEY_ENTER)) {
-		player.setCurrentPosition(2048, 2048);
-		return WOODLAND_SCENE;
-	}
-
 	return MAIN_MENU_SCENE;
 }

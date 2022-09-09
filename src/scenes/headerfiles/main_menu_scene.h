@@ -13,14 +13,12 @@ public:
 
 	void update(Player& player, Camera2D& camera) override;
 	void draw(Player& player, Camera2D& camera) override;
-	SceneType setNextScene(Player& player) override;
+	SceneType setNextScene(Player& player, bool& exitWindowRequested) override;
 
 private:
 	
 	Texture2D logo;
 	Texture2D ui_buttons;
 
-	Button start_button;
-	//Button options_button;
-	//Button quit_button;
+	std::vector<Button> button_vector;
 };
