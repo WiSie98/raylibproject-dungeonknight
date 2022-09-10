@@ -36,25 +36,35 @@ void WoodlandScene::update(Player& player, PlayerCamera& camera) {
 void WoodlandScene::draw(Player& player, PlayerCamera& camera) {
 	//DrawText("Woodland scene", 10, 10, 30, LIGHTGRAY);
     BeginMode2D(camera.getPlayerCamera());
-    drawBackground();
+    drawBackground(camera);
 
     //Everything that is not part of the map schould be rendered here.
     player.draw();
 
-    drawForeground();
+    drawForeground(camera);
     camera.draw(player);
     EndMode2D();
 }
 
-void WoodlandScene::drawBackground() {
+void WoodlandScene::drawBackground(PlayerCamera& camera) {
+    Vector2 camera_position = camera.getPlayerCamera().target;
+    camera_position.x = camera_position.x - (float)GetScreenWidth() / 2;
+    camera_position.y = camera_position.y - (float)GetScreenHeight() / 2;
     for (const auto& tile : this->woodland_tiles_background_vector) {
-        DrawTextureRec(this->tile_atlas_texture, tile->spritesheet_position, tile->position_on_screen, WHITE);
+        if (camera_position.x < tile->position_on_screen.x && tile->position_on_screen.x < camera_position.x + (float)GetScreenWidth() && camera_position.y < tile->position_on_screen.y && tile->position_on_screen.y < camera_position.y + (float)GetScreenHeight()) {
+            DrawTextureRec(this->tile_atlas_texture, tile->spritesheet_position, tile->position_on_screen, WHITE);
+        }
     }
 }
 
-void WoodlandScene::drawForeground() {
+void WoodlandScene::drawForeground(PlayerCamera& camera) {
+    Vector2 camera_position = camera.getPlayerCamera().target;
+    camera_position.x = camera_position.x - (float)GetScreenWidth() / 2;
+    camera_position.y = camera_position.y - (float)GetScreenHeight() / 2;
     for (const auto& tile : this->woodland_tiles_foreground_vector) {
-        DrawTextureRec(this->tile_atlas_texture, tile->spritesheet_position, tile->position_on_screen, WHITE);
+        if (camera_position.x < tile->position_on_screen.x && tile->position_on_screen.x < camera_position.x + (float)GetScreenWidth() && camera_position.y < tile->position_on_screen.y && tile->position_on_screen.y < camera_position.y + (float)GetScreenHeight()) {
+            DrawTextureRec(this->tile_atlas_texture, tile->spritesheet_position, tile->position_on_screen, WHITE);
+        }
     }
 }
 

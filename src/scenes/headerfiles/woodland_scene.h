@@ -13,8 +13,8 @@ public:
 	void update(Player& player, PlayerCamera& camera) override;
 	void draw(Player& player, PlayerCamera& camera) override;
 
-	void drawBackground();
-	void drawForeground();
+	void drawBackground(PlayerCamera& camera);
+	void drawForeground(PlayerCamera& camera);
 
 	void parseLevelBackgroundTiles(nlohmann::json& tileset_description, nlohmann::json& level_map);
 	void parseLevelForegroundTiles(nlohmann::json& tileset_description, nlohmann::json& level_map);
