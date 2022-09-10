@@ -1,4 +1,4 @@
-#include "headerfiles/ui_game_interface.h"
+#include "headerfiles/ui_player_bar.h"
 
 GameInterface::GameInterface(Texture2D spritesheet, float spritesheet_source_x, float spritesheet_source_y, float spritesheet_source_width, float spritesheet_source_height, float spritesheet_destination_x, float spritesheet_destination_y, float scale) {
 	setSpritesheet(spritesheet);

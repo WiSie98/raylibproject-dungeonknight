@@ -27,13 +27,13 @@ MainMenuScene::~MainMenuScene() {
 	UnloadTexture(this->ui_buttons);
 }
 
-void MainMenuScene::update(Player& player, Camera2D& camera) {
+void MainMenuScene::update(Player& player, PlayerCamera& camera) {
 	for (int i = 0; i < this->button_vector.size(); i++) {
 		this->button_vector[i].update();
 	}
 }
 
-void MainMenuScene::draw(Player& player, Camera2D& camera) {
+void MainMenuScene::draw(Player& player, PlayerCamera& camera) {
 	DrawTexturePro(this->logo, Rectangle{ 0.0f, 0.0f, (float)this->logo.width, (float)this->logo.height }, Rectangle{ (float)(GetScreenWidth() / 2), (float)(GetScreenHeight() / 3), (float)this->logo.width * 2, (float)this->logo.height * 2 }, Vector2{ (float)this->logo.width, (float)this->logo.height }, 0, WHITE);
 	for (int i = 0; i < this->button_vector.size(); i++) {
 		this->button_vector[i].draw();

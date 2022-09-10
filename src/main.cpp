@@ -7,6 +7,7 @@
 #include "scenes/headerfiles/scenes.h"
 #include "core/headerfiles/scene_manager.h"
 #include "actors/headerfiles/actor_player.h"
+#include "core/headerfiles/camera.h"
 
 int main() {
     // Raylib initialization
@@ -34,11 +35,7 @@ int main() {
 
     Player player(1000, 500, 100, 0, 0, player_texture);
 
-    Camera2D playerCamera;
-    playerCamera.offset.x = (float)GetScreenWidth() / 2;
-    playerCamera.offset.y = (float)GetScreenHeight() / 2;
-    playerCamera.zoom = 3.0f;
-    playerCamera.rotation = 0;
+    PlayerCamera playerCamera(player);
 
     // Main game loop
     while (!exitWindow) // Detect window close button or ESC key
@@ -51,7 +48,7 @@ int main() {
         sceneManager.switchToScene(sceneManager.getCurrentScene()->setNextScene(player, exitWindowRequested));
         sceneManager.update(player, playerCamera);
 
-        playerCamera.target = player.getCurrentPosition();
+        playerCamera.setTarget(player.getCurrentPosition());
 
         BeginDrawing();
             //Draw code between BeginDrawing() and EndDrawing()

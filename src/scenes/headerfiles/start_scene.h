@@ -10,9 +10,12 @@ public:
 
 	~StartScene();
 
-	void update(Player& player, Camera2D& camera) override;
-	void draw(Player& player, Camera2D& camera) override;
+	void update(Player& player, PlayerCamera& camera) override;
+	void draw(Player& player, PlayerCamera& camera) override;
 	SceneType setNextScene(Player& player, bool& exitWindowRequested) override;
+
+    void updateAnimatedLogo();
+    void drawAnimatedLogo();
 
 private:
 

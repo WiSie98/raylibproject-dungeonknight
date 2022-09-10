@@ -12,11 +12,11 @@ void SceneManager::switchToScene(SceneType scene_type) {
 	}
 }
 
-void SceneManager::update(Player& player, Camera2D& camera) {
+void SceneManager::update(Player& player, PlayerCamera& camera) {
 	this->current_scene->update(player, camera);
 }
 
-void SceneManager::draw(Player& player, Camera2D& camera) {
+void SceneManager::draw(Player& player, PlayerCamera& camera) {
 	this->current_scene->draw(player, camera);
 }
 

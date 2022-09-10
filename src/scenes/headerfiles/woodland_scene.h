@@ -2,7 +2,6 @@
 
 #include "..\..\core\headerfiles\header.h"
 #include "..\..\core\headerfiles\scene.h"
-#include "..\..\ui\headerfiles\ui_game_interface.h"
 
 class WoodlandScene final : public Scene {
 public:
@@ -11,8 +10,11 @@ public:
 
 	~WoodlandScene();
 
-	void update(Player& player, Camera2D& camera) override;
-	void draw(Player& player, Camera2D& camera) override;
+	void update(Player& player, PlayerCamera& camera) override;
+	void draw(Player& player, PlayerCamera& camera) override;
+
+	void drawBackground();
+	void drawForeground();
 
 	void parseLevelBackgroundTiles(nlohmann::json& tileset_description, nlohmann::json& level_map);
 	void parseLevelForegroundTiles(nlohmann::json& tileset_description, nlohmann::json& level_map);
@@ -27,7 +29,6 @@ private:
 	Texture2D player_ui_texture;
 	Texture2D tile_atlas_texture;
 	LevelTile woodland_tiles;
-	GameInterface player_ui;
 
 	std::vector<std::shared_ptr<LevelTile>> woodland_tiles_background_vector;
 	std::vector<std::shared_ptr<LevelTile>> woodland_tiles_foreground_vector;
