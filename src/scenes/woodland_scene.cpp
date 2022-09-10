@@ -1,6 +1,6 @@
 #include "headerfiles/woodland_scene.h"
 
-WoodlandScene::WoodlandScene() {
+WoodlandScene::WoodlandScene() : player_ui(this->player_ui_texture, 0, 0, 72, 24, 0, 0, 1.0f) {
 	setSceneType(WOODLAND_SCENE);
 
     std::ifstream tileset_description_file("./assets/level/dk_ts_woodlandbiom.json");
@@ -11,7 +11,10 @@ WoodlandScene::WoodlandScene() {
     nlohmann::json level_map = nlohmann::json::parse(level_map_file);
     level_map_file.close();
 
+    this->player_ui_texture = LoadTexture("./assets/graphics/spritesheets/dk_sptsht_ui_mainhud.png");
     this->tile_atlas_texture = LoadTexture(("./assets/graphics/tilesets/" + tileset_description["image"].get<std::string>()).c_str());
+    
+    this->player_ui.setSpritesheet(this->player_ui_texture);
 
 	parseLevelBackgroundTiles(tileset_description, level_map);
     parseLevelForegroundTiles(tileset_description, level_map);
@@ -20,14 +23,27 @@ WoodlandScene::WoodlandScene() {
 
 WoodlandScene::~WoodlandScene() {
 	UnloadTexture(this->tile_atlas_texture);
+    UnloadTexture(this->player_ui_texture);
 }
 
 //---------------------------Functions---------------------------------
 
 void WoodlandScene::update(Player& player, Camera2D& camera) {
+    this->player_ui.setMaxHealth(player.getMaxHealth());
+    this->player_ui.setMaxShield(player.getMaxShield());
+    this->player_ui.setMaxStamina(player.getMaxStamina());
+
+    this->player_ui.setHealth(player.getHealth());
+    this->player_ui.setShield(player.getShield());
+    this->player_ui.setStamina(player.getStamina());
+
     player.update();
+
     detectCollision(player);
     player.setLastPosition(player.getCurrentPosition());
+
+    this->player_ui.update();
+    this->player_ui.setSpritesheetDestination(player.getCurrentPosition().x - ((float)GetScreenWidth() / 2) / camera.zoom, player.getCurrentPosition().y - ((float)GetScreenHeight() / 2) / camera.zoom, this->player_ui.getSpritesheetDestination().width, this->player_ui.getSpritesheetDestination().height);
 }
 
 void WoodlandScene::draw(Player& player, Camera2D& camera) {
@@ -43,6 +59,9 @@ void WoodlandScene::draw(Player& player, Camera2D& camera) {
     for (const auto& tile : this->woodland_tiles_foreground_vector) {
         DrawTextureRec(this->tile_atlas_texture, tile->spritesheet_position, tile->position_on_screen, WHITE);
     }
+    this->player_ui.draw();
+    DrawTexturePro(this->player_ui_texture, Rectangle{ 96, 0, 216, 48 }, Rectangle{ (player.getCurrentPosition().x + 56) - (player_ui_texture.width * this->player_ui.getScale()) / 2, player.getCurrentPosition().y - ((float)GetScreenHeight() / 2) / camera.zoom, 216 * this->player_ui.getScale(), 48 * this->player_ui.getScale() }, Vector2{ 0, 0 }, 0, WHITE);
+    DrawText(TextFormat("%i", player.getMoney()), player.getCurrentPosition().x + 5, (player.getCurrentPosition().y - ((float)GetScreenHeight() / 2) / camera.zoom) + 24, 4, BLACK);
     EndMode2D();
 }
 

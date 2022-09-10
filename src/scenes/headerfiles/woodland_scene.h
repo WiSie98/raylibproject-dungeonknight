@@ -2,6 +2,7 @@
 
 #include "..\..\core\headerfiles\header.h"
 #include "..\..\core\headerfiles\scene.h"
+#include "..\..\ui\headerfiles\ui_game_interface.h"
 
 class WoodlandScene final : public Scene {
 public:
@@ -23,8 +24,10 @@ public:
 
 private:
 
+	Texture2D player_ui_texture;
 	Texture2D tile_atlas_texture;
 	LevelTile woodland_tiles;
+	GameInterface player_ui;
 
 	std::vector<std::shared_ptr<LevelTile>> woodland_tiles_background_vector;
 	std::vector<std::shared_ptr<LevelTile>> woodland_tiles_foreground_vector;

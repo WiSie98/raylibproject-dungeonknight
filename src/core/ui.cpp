@@ -2,6 +2,10 @@
 
 //----------------------------Setter----------------------------------
 
+void UI::setScale(float scale) {
+	this->scale = scale;
+}
+
 void UI::setOrigin(Vector2 on_screen_position) {
 	this->origin = on_screen_position;
 }
@@ -38,6 +42,10 @@ void UI::setSpritesheet(Texture2D spritesheet) {
 }
 
 //----------------------------Getter----------------------------------
+
+float UI::getScale() {
+	return this->scale;
+}
 
 Vector2 UI::getOrigin() {
 	return this->origin;

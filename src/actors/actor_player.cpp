@@ -1,17 +1,46 @@
 #include "headerfiles/actor_player.h"
 
-Player::Player(float health, float shield, float stamina, float traverse_speed, float position_x, float position_y, Texture2D texture) : animation(32, 16, 16, texture) {
+Player::Player(float health, float shield, float stamina, float position_x, float position_y, Texture2D texture) : animation(32, 16, 16, texture) {
+	setMaxHealth(1000);
+	setMaxShield(500);
+	setMaxStamina(100);
+	setTraverseSpeed(5);
 	setHealth(health);
 	setShield(shield);
 	setStamina(stamina);
-	setTraverseSpeed(traverse_speed);
 	setCurrentPosition(position_x, position_y);
 	setLastPosition(position_x, position_y);
 	setTexture(texture);
+	setMoney(0);
 }
 
 void Player::update() {
+	this->playerMovement();
+}
+
+void Player::draw() {
+	this->animation.draw(this->current_position);
+}
+
+void Player::playerMovement() {
 	this->isKeyPressed = false;
+
+	if (IsKeyDown(KEY_LEFT_SHIFT) && this->stamina > 0) {
+		setTraverseSpeed(5);
+		setStamina(getStamina() - 0.7f);
+		this->animation.setFrameSpeed(32);
+	}
+	else {
+		setTraverseSpeed(3.4f);
+		this->animation.setFrameSpeed(28);
+		if (this->stamina < this->max_stamina && !IsKeyDown(KEY_NULL)) {
+			setStamina(getStamina() + 0.2);
+		}
+		else if (this->stamina < this->max_stamina && IsKeyDown(KEY_NULL)) {
+			setStamina(getStamina() + 1);
+		}
+	}
+
 	if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
 		this->current_position.y = this->current_position.y - this->traverse_speed;
 		this->animation.update(WALKING_UP);
@@ -41,10 +70,6 @@ void Player::update() {
 	}
 }
 
-void Player::draw() {
-	this->animation.draw(this->current_position);
-}
-
 void Player::removeDedicatedWeapon(int slot_num) {
 
 }
@@ -56,15 +81,38 @@ void Player::removeDedicatedItem(int slot_num) {
 //----------------------------Setter----------------------------------
 
 void Player::setMoney(int money) {
-	this->money = money;
+	if (money < 0) {
+		this->money = 0;
+	}
+	else {
+		this->money = money;
+	}
 }
 
 void Player::setShield(float shield) {
-	this->shield = shield;
+	if (shield > this->max_shield) {
+		this->shield = this->max_shield;
+	}
+	else {
+		this->shield = shield;
+	}
+}
+
+void Player::setMaxShield(float max_shield) {
+	this->max_shield = max_shield;
 }
 
 void Player::setStamina(float stamina) {
-	this->stamina = stamina;
+	if (stamina > this->max_stamina) {
+		this->stamina = this->max_stamina;
+	}
+	else {
+		this->stamina = stamina;
+	}
+}
+
+void Player::setMaxStamina(float max_stamina) {
+	this->max_stamina = max_stamina;
 }
 
 void Player::setDedicatedWeapon(int slot_num, std::shared_ptr<ItemBase> weapon) {
@@ -111,8 +159,16 @@ float Player::getShield() {
 	return this->shield;
 }
 
+float Player::getMaxShield() {
+	return this->max_shield;
+}
+
 float Player::getStamina() {
 	return this->stamina;
+}
+
+float Player::getMaxStamina() {
+	return this->max_stamina;
 }
 
 std::shared_ptr<ItemBase> Player::getDedicatedWeapon(int slot_num) {

@@ -10,7 +10,7 @@
 class Player final : public ActorBase {
 public:
 
-	Player(float health, float shield, float stamina, float traverse_speed, float position_x, float position_y, Texture2D texture);
+	Player(float health, float shield, float stamina, float position_x, float position_y, Texture2D texture);
 
 	~Player() {}
 
@@ -22,13 +22,17 @@ public:
 
 	void setMoney(int money);
 	void setShield(float shield);
+	void setMaxShield(float max_shield);
 	void setStamina(float stamina);
+	void setMaxStamina(float max_stamina);
 	void setDedicatedWeapon(int slot_num, std::shared_ptr<ItemBase> weapon);
 	void setDedicatedItem(int slot_num, std::shared_ptr<ItemBase> item);
 
 	int getMoney();
 	float getShield();
+	float getMaxShield();
 	float getStamina();
+	float getMaxStamina();
 	std::shared_ptr<ItemBase> getDedicatedWeapon(int slot_num);
 	std::shared_ptr<ItemBase> getDedicatedItem(int slot_num);
 
@@ -36,7 +40,9 @@ private:
 
 	int money;
 	float shield;
+	float max_shield;
 	float stamina;
+	float max_stamina;
 	bool isKeyPressed;
 
 	Animation animation;
@@ -49,6 +55,8 @@ private:
 	std::shared_ptr<ItemBase> dedicated_item_slot3;
 	std::shared_ptr<ItemBase> dedicated_item_slot4;
 	std::shared_ptr<ItemBase> dedicated_item_slot5;
+
+	void playerMovement();
 
 	//Container<std::shared_ptr<ItemBase>> weapon_inventory;
 	//Container<std::shared_ptr<ItemBase>> item_inventory;

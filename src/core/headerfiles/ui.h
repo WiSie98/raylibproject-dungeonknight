@@ -8,6 +8,7 @@ public:
 	virtual void update() = 0;
 	virtual void draw() = 0;
 
+	void setScale(float scale);
 	void setOrigin(Vector2 on_screen_position);
 	void setOrigin(float pos_x, float pos_y);
 	void setSpritesheetSource(Rectangle spritesheet_source);
@@ -16,6 +17,7 @@ public:
 	void setSpritesheetDestination(float pos_x, float pos_y, float width, float height);
 	void setSpritesheet(Texture2D spritesheet);
 
+	float getScale();
 	Vector2 getOrigin();
 	Rectangle getSpritesheetSource();
 	Rectangle getSpritesheetDestination();
@@ -27,6 +29,7 @@ private:
 
 protected:
 
+	float scale;
 	Vector2 origin;
 	Rectangle spritesheet_source;
 	Rectangle spritesheet_destination;

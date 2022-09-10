@@ -67,10 +67,6 @@ void Button::draw() {
 
 //----------------------------Setter----------------------------------
 
-void Button::setScale(float scale) {
-	this->scale = scale;
-}
-
 void Button::setIsButtonAction(bool isButtonAction) {
 	this->isButtonAction = isButtonAction;
 }
@@ -109,10 +105,6 @@ void Button::setButtonText(std::string button_text) {
 }
 
 //----------------------------Getter----------------------------------
-
-float Button::getScale() {
-	return this->scale;
-}
 
 bool Button::getIsButtonAction() {
 	return this->isButtonAction;

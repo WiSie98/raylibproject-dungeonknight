@@ -3,7 +3,16 @@
 //----------------------------Setter----------------------------------
 
 void ActorBase::setHealth(float health) {
-	this->health = health;
+	if (health > this->max_health) {
+		this->health = this->max_health;
+	}
+	else {
+		this->health = health;
+	}
+}
+
+void ActorBase::setMaxHealth(float max_health) {
+	this->max_health = max_health;
 }
 
 void ActorBase::setTraverseSpeed(float traverse_speed) {
@@ -35,6 +44,10 @@ void ActorBase::setTexture(Texture2D texture) {
 
 float ActorBase::getHealth() {
 	return this->health;
+}
+
+float ActorBase::getMaxHealth() {
+	return this->max_health;
 }
 
 float ActorBase::getTraverseSpeed() {

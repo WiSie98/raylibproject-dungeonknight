@@ -32,7 +32,7 @@ int main() {
     GenerateScenes(sceneManager.getScenes());
     sceneManager.switchToScene(START_SCENE);
 
-    Player player(100, 100, 100, 5, 0, 0, player_texture);
+    Player player(1000, 500, 100, 0, 0, player_texture);
 
     Camera2D playerCamera;
     playerCamera.offset.x = (float)GetScreenWidth() / 2;

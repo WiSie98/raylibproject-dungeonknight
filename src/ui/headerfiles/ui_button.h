@@ -14,7 +14,6 @@ public:
 	void update() override;
 	void draw() override;
 
-	void setScale(float scale);
 	void setIsButtonAction(bool isButtonAction);
 	void setTextPosition(Vector2 text_position);
 	void setTextPosition(float text_position_x, float text_position_y);
@@ -24,7 +23,6 @@ public:
 	void setButtonType(ButtonType button_type);
 	void setButtonText(std::string button_text);
 
-	float getScale();
 	bool getIsButtonAction();
 	Vector2 getTextPosition();
 	Rectangle getButtonBounds();
@@ -34,7 +32,6 @@ public:
 
 private:
 
-	float scale;
 	bool isButtonAction;
 	Vector2 text_position;
 	Rectangle button_bounds;
