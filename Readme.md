@@ -9,7 +9,7 @@
                      |___/                                 |___/                          |__/               
 ```
 
-# raylibstarter - minimal edition
+# raylibproject - Dungeon Knight
 
 [![CMakeBuilds](https://github.com/chfhhd/raylibstarter-minimal/actions/workflows/cmake.yml/badge.svg)](https://github.com/chfhhd/raylibstarter/actions/workflows/cmake.yml)
 
