@@ -80,7 +80,7 @@ void WoodlandScene::parseLevelBackgroundTiles(nlohmann::json& tileset_descriptio
                     if (tileId != 0) {
                         rec.x = static_cast<float>((static_cast<int>(tileId - 1) % static_cast<int>(tileset_description["columns"]))) * static_cast<float>(level_map["tilewidth"]);
                         rec.y = static_cast<float>(floor(static_cast<float>(tileId) / static_cast<float>(tileset_description["columns"]))) * static_cast<float>(level_map["tilewidth"]);
-                        if (tileId % static_cast<int>(32) == 0) {
+                        if (static_cast<int>(tileId) % 32 == 0) {
                             rec.y -= 16;
                         }
 
@@ -119,7 +119,7 @@ void WoodlandScene::parseLevelForegroundTiles(nlohmann::json& tileset_descriptio
                     if (tileId != 0) {
                         rec.x = static_cast<float>((static_cast<int>(tileId - 1) % static_cast<int>(tileset_description["columns"]))) * static_cast<float>(level_map["tilewidth"]);
                         rec.y = static_cast<float>(floor(static_cast<float>(tileId) / static_cast<float>(tileset_description["columns"]))) * static_cast<float>(level_map["tilewidth"]);
-                        if (tileId % static_cast<int>(32) == 0) {
+                        if (static_cast<int>(tileId) % 32 == 0) {
                             rec.y -= 16;
                         }
 
