@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\..\core\headerfiles\header.h"
+#include "../../core/headerfiles/header.h"
 
-#include "..\..\core\headerfiles\actor_base.h"
+#include "../../core/headerfiles/actor_base.h"
 
 class Enemy final : public ActorBase {
 public:

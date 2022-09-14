@@ -48,10 +48,10 @@ void WoodlandScene::draw(Player& player, PlayerCamera& camera) {
 
 void WoodlandScene::drawBackground(PlayerCamera& camera) {
     Vector2 camera_position = camera.getPlayerCamera().target;
-    camera_position.x = camera_position.x - (float)GetScreenWidth() / 2;
-    camera_position.y = camera_position.y - (float)GetScreenHeight() / 2;
+    camera_position.x = camera_position.x - static_cast<float>(GetScreenWidth() / 2);
+    camera_position.y = camera_position.y - static_cast<float>(GetScreenHeight() / 2);
     for (const auto& tile : this->woodland_tiles_background_vector) {
-        if (camera_position.x < tile->position_on_screen.x && tile->position_on_screen.x < camera_position.x + (float)GetScreenWidth() && camera_position.y < tile->position_on_screen.y && tile->position_on_screen.y < camera_position.y + (float)GetScreenHeight()) {
+        if (camera_position.x < tile->position_on_screen.x && tile->position_on_screen.x < camera_position.x + static_cast<float>(GetScreenWidth()) && camera_position.y < tile->position_on_screen.y && tile->position_on_screen.y < camera_position.y + static_cast<float>(GetScreenHeight())) {
             DrawTextureRec(this->tile_atlas_texture, tile->spritesheet_position, tile->position_on_screen, WHITE);
         }
     }
@@ -59,10 +59,10 @@ void WoodlandScene::drawBackground(PlayerCamera& camera) {
 
 void WoodlandScene::drawForeground(PlayerCamera& camera) {
     Vector2 camera_position = camera.getPlayerCamera().target;
-    camera_position.x = camera_position.x - (float)GetScreenWidth() / 2;
-    camera_position.y = camera_position.y - (float)GetScreenHeight() / 2;
+    camera_position.x = camera_position.x - static_cast<float>(GetScreenWidth() / 2);
+    camera_position.y = camera_position.y - static_cast<float>(GetScreenHeight() / 2);
     for (const auto& tile : this->woodland_tiles_foreground_vector) {
-        if (camera_position.x < tile->position_on_screen.x && tile->position_on_screen.x < camera_position.x + (float)GetScreenWidth() && camera_position.y < tile->position_on_screen.y && tile->position_on_screen.y < camera_position.y + (float)GetScreenHeight()) {
+        if (camera_position.x < tile->position_on_screen.x && tile->position_on_screen.x < camera_position.x + static_cast<float>(GetScreenWidth()) && camera_position.y < tile->position_on_screen.y && tile->position_on_screen.y < camera_position.y + static_cast<float>(GetScreenHeight())) {
             DrawTextureRec(this->tile_atlas_texture, tile->spritesheet_position, tile->position_on_screen, WHITE);
         }
     }
@@ -78,8 +78,8 @@ void WoodlandScene::parseLevelBackgroundTiles(nlohmann::json& tileset_descriptio
             for (auto const& tileId : layer["data"]) {
                 if (layer["id"] < 8 ) {
                     if (tileId != 0) {
-                        rec.x = (float)((int)tileId - 1 % (int)tileset_description["columns"]) * (float)level_map["tilewidth"];
-                        rec.y = (float)floor((float)tileId / (float)tileset_description["columns"]) * (float)level_map["tilewidth"];
+                        rec.x = static_cast<float>((static_cast<int>(tileId - 1) % static_cast<int>(tileset_description["columns"]))) * static_cast<float>(level_map["tilewidth"]);
+                        rec.y = static_cast<float>(floor(static_cast<float>(tileId) / static_cast<float>(tileset_description["columns"]))) * static_cast<float>(level_map["tilewidth"]);
                         if (tileId % 32 == 0) {
                             rec.y -= 16;
                         }
@@ -94,12 +94,12 @@ void WoodlandScene::parseLevelBackgroundTiles(nlohmann::json& tileset_descriptio
                     return;
                 }
 
-                vec.x += (float)level_map["tilewidth"];
-                if (vec.x >= (float)layer["width"] * (float)level_map["tilewidth"]) {
+                vec.x += static_cast<float>(level_map["tilewidth"]);
+                if (vec.x >= static_cast<float>(layer["width"]) * static_cast<float>(level_map["tilewidth"])) {
                     vec.x = 0;
-                    vec.y += (float)level_map["tileheight"];
+                    vec.y += static_cast<float>(level_map["tileheight"]);
                 }
-                if (vec.y >= (float)layer["height"] * (float)level_map["tileheight"]) {
+                if (vec.y >= static_cast<float>(layer["height"]) * static_cast<float>(level_map["tileheight"])) {
                     vec.y = 0;
                 }
             }
@@ -117,8 +117,8 @@ void WoodlandScene::parseLevelForegroundTiles(nlohmann::json& tileset_descriptio
             for (auto const& tileId : layer["data"]) {
                 if (layer["id"] > 8 && layer["id"] != 13) {
                     if (tileId != 0) {
-                        rec.x = (float)((int)tileId - 1 % (int)tileset_description["columns"]) * (float)level_map["tilewidth"];
-                        rec.y = (float)floor((float)tileId / (float)tileset_description["columns"]) * (float)level_map["tilewidth"];
+                        rec.x = static_cast<float>((static_cast<int>(tileId - 1) % static_cast<int>(tileset_description["columns"]))) * static_cast<float>(level_map["tilewidth"]);
+                        rec.y = static_cast<float>(floor(static_cast<float>(tileId) / static_cast<float>(tileset_description["columns"]))) * static_cast<float>(level_map["tilewidth"]);
                         if (tileId % 32 == 0) {
                             rec.y -= 16;
                         }
@@ -130,12 +130,12 @@ void WoodlandScene::parseLevelForegroundTiles(nlohmann::json& tileset_descriptio
                     }
                 }
 
-                vec.x += (float)level_map["tilewidth"];
-                if (vec.x >= (float)layer["width"] * (float)level_map["tilewidth"]) {
+                vec.x += static_cast<float>(level_map["tilewidth"]);
+                if (vec.x >= static_cast<float>(layer["width"]) * static_cast<float>(level_map["tilewidth"])) {
                     vec.x = 0;
-                    vec.y += (float)level_map["tileheight"];
+                    vec.y += static_cast<float>(level_map["tileheight"]);
                 }
-                if (vec.y >= (float)layer["height"] * (float)level_map["tileheight"]) {
+                if (vec.y >= static_cast<float>(layer["height"]) * static_cast<float>(level_map["tileheight"])) {
                     vec.y = 0;
                 }
             }
@@ -158,12 +158,12 @@ void WoodlandScene::parseLevelCollider(nlohmann::json& tileset_description, nloh
                     this->woodland_tiles_collider_vector.push_back(collider_tile);
                 }
 
-                vec.x += (float)level_map["tilewidth"];
-                if (vec.x >= (float)layer["width"] * (float)level_map["tilewidth"]) {
+                vec.x += static_cast<float>(level_map["tilewidth"]);
+                if (vec.x >= static_cast<float>(layer["width"]) * static_cast<float>(level_map["tilewidth"])) {
                     vec.x = 0;
-                    vec.y += (float)level_map["tileheight"];
+                    vec.y += static_cast<float>(level_map["tileheight"]);
                 }
-                if (vec.y >= (float)layer["height"] * (float)level_map["tileheight"]) {
+                if (vec.y >= static_cast<float>(layer["height"]) * static_cast<float>(level_map["tileheight"])) {
                     vec.y = 0;
                 }
             }

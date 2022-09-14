@@ -8,7 +8,7 @@ PlayerCamera::PlayerCamera(Player& player) : main_hud(this->main_hud_texture, 0,
     this->main_hud.setMaxShield(player.getMaxShield());
     this->main_hud.setMaxStamina(player.getMaxStamina());
 
-    setOffset((float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2);
+    setOffset(static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2));
     setZoom(3.0f);
     setRotation(0.0f);
 }
@@ -23,13 +23,13 @@ void PlayerCamera::update(Player& player) {
     this->main_hud.setStamina(player.getStamina());
 
     this->main_hud.update();
-    this->main_hud.setSpritesheetDestination(player.getCurrentPosition().x - ((float)GetScreenWidth() / 2) / getPlayerCamera().zoom, player.getCurrentPosition().y - ((float)GetScreenHeight() / 2) / getPlayerCamera().zoom, this->main_hud.getSpritesheetDestination().width, this->main_hud.getSpritesheetDestination().height);
+    this->main_hud.setSpritesheetDestination(player.getCurrentPosition().x - (static_cast<float>(GetScreenWidth() / 2)) / getPlayerCamera().zoom, player.getCurrentPosition().y - (static_cast<float>(GetScreenHeight() / 2)) / getPlayerCamera().zoom, this->main_hud.getSpritesheetDestination().width, this->main_hud.getSpritesheetDestination().height);
 }
 
 void PlayerCamera::draw(Player& player) {
     this->main_hud.draw();
-    DrawTexturePro(this->main_hud_texture, Rectangle{ 96, 0, 216, 48 }, Rectangle{ player.getCurrentPosition().x - (216 * this->main_hud.getScale()) / 2, player.getCurrentPosition().y - ((float)GetScreenHeight() / 2) / getPlayerCamera().zoom, 216 * this->main_hud.getScale(), 48 * this->main_hud.getScale()}, Vector2{0, 0}, 0, WHITE);
-    DrawText(TextFormat("%i", player.getMoney()), player.getCurrentPosition().x, (player.getCurrentPosition().y - ((float)GetScreenHeight() / 2) / getPlayerCamera().zoom) + 24, 4, BLACK);
+    DrawTexturePro(this->main_hud_texture, Rectangle{ 96, 0, 216, 48 }, Rectangle{ player.getCurrentPosition().x - (216 * this->main_hud.getScale()) / 2, player.getCurrentPosition().y - (static_cast<float>(GetScreenHeight() / 2)) / getPlayerCamera().zoom, 216 * this->main_hud.getScale(), 48 * this->main_hud.getScale()}, Vector2{0, 0}, 0, WHITE);
+    DrawText(TextFormat("%i", player.getMoney()), player.getCurrentPosition().x, (player.getCurrentPosition().y - (static_cast<float>(GetScreenHeight() / 2)) / getPlayerCamera().zoom) + 24, 4, BLACK);
 }
 
 //----------------------------Setter----------------------------------

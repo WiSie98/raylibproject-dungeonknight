@@ -90,22 +90,22 @@ void Animation::drawStanding(Vector2& position) {
 
 void Animation::drawWalking(Vector2& position) {
 	if (this->current_state == WALKING_UP) {
-		this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+		this->spritesheet_rectangle.x = static_cast<float>(this->current_frame) * this->spritesheet_rectangle.width;
 		this->spritesheet_rectangle.y = this->spritesheet_rectangle.height;
 		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
 	}
 	else if (this->current_state == WALKING_DOWN) {
-		this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+		this->spritesheet_rectangle.x = static_cast<float>(this->current_frame) * this->spritesheet_rectangle.width;
 		this->spritesheet_rectangle.y = this->spritesheet_rectangle.height * 2;
 		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
 	}
 	else if (this->current_state == WALKING_LEFT) {
-		this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+		this->spritesheet_rectangle.x = static_cast<float>(this->current_frame) * this->spritesheet_rectangle.width;
 		this->spritesheet_rectangle.y = this->spritesheet_rectangle.height * 3;
 		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
 	}
 	else if (this->current_state == WALKING_RIGHT) {
-		this->spritesheet_rectangle.x = (float)this->current_frame * this->spritesheet_rectangle.width;
+		this->spritesheet_rectangle.x = static_cast<float>(this->current_frame) * this->spritesheet_rectangle.width;
 		this->spritesheet_rectangle.y = this->spritesheet_rectangle.height * 4;
 		DrawTextureRec(this->spritesheet, this->spritesheet_rectangle, position, WHITE);
 	}

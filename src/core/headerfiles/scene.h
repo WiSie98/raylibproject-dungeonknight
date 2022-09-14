@@ -2,7 +2,7 @@
 
 #include "header.h"
 
-#include "..\..\actors\headerfiles\actor_player.h"
+#include "../../actors/headerfiles/actor_player.h"
 #include "camera.h"
 
 class Scene {

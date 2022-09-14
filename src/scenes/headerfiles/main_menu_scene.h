@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\..\core\headerfiles\header.h"
-#include "..\..\core\headerfiles\scene.h"
-#include "..\..\ui\headerfiles\ui_button.h"
+#include "../../core/headerfiles/header.h"
+#include "../../core/headerfiles/scene.h"
+#include "../../ui/headerfiles/ui_button.h"
 
 class MainMenuScene final : public Scene {
 public:

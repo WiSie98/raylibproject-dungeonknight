@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\core\headerfiles\header.h"
-#include "..\..\core\headerfiles\scene.h"
+#include "../../core/headerfiles/header.h"
+#include "../../core/headerfiles/scene.h"
 
 class WoodlandScene final : public Scene {
 public:

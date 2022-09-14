@@ -34,7 +34,7 @@ void MainMenuScene::update(Player& player, PlayerCamera& camera) {
 }
 
 void MainMenuScene::draw(Player& player, PlayerCamera& camera) {
-	DrawTexturePro(this->logo, Rectangle{ 0.0f, 0.0f, (float)this->logo.width, (float)this->logo.height }, Rectangle{ (float)(GetScreenWidth() / 2), (float)(GetScreenHeight() / 3), (float)this->logo.width * 2, (float)this->logo.height * 2 }, Vector2{ (float)this->logo.width, (float)this->logo.height }, 0, WHITE);
+	DrawTexturePro(this->logo, Rectangle{ 0.0f, 0.0f, static_cast<float>(this->logo.width), static_cast<float>(this->logo.height) }, Rectangle{ static_cast<float>((GetScreenWidth() / 2)), static_cast<float>((GetScreenHeight() / 3)), static_cast<float>(this->logo.width * 2), static_cast<float>(this->logo.height * 2) }, Vector2{ static_cast<float>(this->logo.width), static_cast<float>(this->logo.height) }, 0, WHITE);
 	for (int i = 0; i < this->button_vector.size(); i++) {
 		this->button_vector[i].draw();
 	}

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\core\headerfiles\header.h"
+#include "../../core/headerfiles/header.h"
 
 #include "start_scene.h"
 #include "main_menu_scene.h"
