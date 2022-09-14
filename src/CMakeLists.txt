@@ -18,7 +18,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 #  Link to Raylib
 target_link_libraries(${PROJECT_NAME} raylib)
-set(CMAKE_EXE_LINKER_FLAGS "-static-raylib")
 
 # Copy assets to assets path
 add_custom_target(copy_assets
