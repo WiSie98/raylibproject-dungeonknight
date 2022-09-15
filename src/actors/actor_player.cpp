@@ -1,6 +1,6 @@
 #include "headerfiles/actor_player.h"
 
-Player::Player(float health, float shield, float stamina, float position_x, float position_y, Texture2D texture) : animation(32, 16, 16, texture) {
+Player::Player(float health, float shield, float stamina, float position_x, float position_y, Texture2D texture) : animation(24, 16, 16, texture) {
 	setMaxHealth(1000);
 	setMaxShield(500);
 	setMaxStamina(100);

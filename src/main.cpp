@@ -27,7 +27,7 @@ int main() {
 #endif
 
     //Initialization code here
-    Texture2D player_texture = LoadTexture("assets/graphics/spritesheets/dk_sptsht_playercharacter.png");
+    Texture2D player_texture = LoadTexture("assets/graphics/spritesheets/actors/dk_sptsht_playercharacter.png");
 
     SceneManager sceneManager;
     GenerateScenes(sceneManager.getScenes());

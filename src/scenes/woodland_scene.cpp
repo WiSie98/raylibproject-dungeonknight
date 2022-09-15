@@ -1,6 +1,6 @@
 #include "headerfiles/woodland_scene.h"
 
-WoodlandScene::WoodlandScene() {
+WoodlandScene::WoodlandScene() : enemy("Name", "test", Vector2{2176, 2080}, LoadTexture("assets/graphics/spritesheets/actors/dk_sptsht_stonegolem.png"), 24, 16, 16, 1000, 0.8f, 35, 124, Weaknesses{0.12f, 0.15f, 0.85f, 0.5f, 0.32f}) {
 	setSceneType(WOODLAND_SCENE);
 
     std::ifstream tileset_description_file("./assets/level/dk_ts_woodlandbiom.json");
@@ -27,7 +27,9 @@ WoodlandScene::~WoodlandScene() {
 void WoodlandScene::update(Player& player, PlayerCamera& camera) {
 
     player.update();
-
+    if (!this->enemy.searchForPlayer(player)) {
+        this->enemy.update();
+    }
     detectCollision(player);
 
     camera.update(player);
@@ -39,6 +41,7 @@ void WoodlandScene::draw(Player& player, PlayerCamera& camera) {
     drawBackground(camera);
 
     //Everything that is not part of the map schould be rendered here.
+    this->enemy.draw();
     player.draw();
 
     drawForeground(camera);
@@ -191,8 +194,16 @@ void WoodlandScene::detectCollision(Player& player) {
         if (CheckCollisionCircles(player.getCurrentPosition(), 6, tile->collider_position, 8)) {
             player.setCurrentPosition(player.getLastPosition());
         }
+        if (CheckCollisionCircles(this->enemy.getCurrentPosition(), 6, tile->collider_position, 8)) {
+            this->enemy.setCurrentPosition(this->enemy.getLastPosition());
+        }
+        if (CheckCollisionCircles(this->enemy.getCurrentPosition(), 6, player.getCurrentPosition(), 6)) {
+            this->enemy.setIsDead(true);
+            this->enemy.setFrameConter(0);
+        }
     }
     player.setLastPosition(player.getCurrentPosition());
+    this->enemy.setLastPosition(this->enemy.getCurrentPosition());
 }
 
 //----------------------------Setter----------------------------------
