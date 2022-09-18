@@ -2,6 +2,7 @@
 
 #include "header.h"
 #include "../../ui/headerfiles/ui_player_bar.h"
+#include "../../ui/headerfiles/ui_inventory.h"
 #include "../../actors/headerfiles/actor_player.h"
 
 class PlayerCamera {
@@ -23,6 +24,7 @@ public:
 
 	Camera2D getPlayerCamera();
 	Texture2D getMainHUDTexture();
+	InventoryUI& getInventoryUI();
 
 private:
 
@@ -31,6 +33,7 @@ private:
 	Texture2D main_hud_texture;
 	
 	GameInterface main_hud;
+	InventoryUI inventory_ui;
 
 protected:
 

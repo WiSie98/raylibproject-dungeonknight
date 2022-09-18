@@ -30,7 +30,7 @@ int main() {
     Texture2D player_texture = LoadTexture("assets/graphics/spritesheets/actors/dk_sptsht_playercharacter.png");
 
     SceneManager sceneManager;
-    GenerateScenes(sceneManager.getScenes());
+    GenerateScenes(&sceneManager.getScenes());
     sceneManager.switchToScene(START_SCENE);
 
     Player player(1000, 500, 100, 0, 0, player_texture);

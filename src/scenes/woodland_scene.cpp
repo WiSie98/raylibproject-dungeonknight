@@ -13,7 +13,7 @@ WoodlandScene::WoodlandScene() : enemy("Name", "test", Vector2{2176, 2080}, Load
 
     this->tile_atlas_texture = LoadTexture(("./assets/graphics/tilesets/" + tileset_description["image"].get<std::string>()).c_str());
 
-	parseLevelBackgroundTiles(tileset_description, level_map);
+    parseLevelBackgroundTiles(tileset_description, level_map);
     parseLevelForegroundTiles(tileset_description, level_map);
     parseLevelCollider(tileset_description, level_map);
 }
@@ -46,6 +46,7 @@ void WoodlandScene::draw(Player& player, PlayerCamera& camera) {
 
     drawForeground(camera);
     camera.draw(player);
+    player.getInventory().draw();
     EndMode2D();
 }
 
@@ -176,8 +177,9 @@ void WoodlandScene::parseLevelCollider(nlohmann::json& tileset_description, nloh
 }
 
 void WoodlandScene::detectCollision(Player& player) {
-    /*
+
     Rectangle player_rec = { player.getCurrentPosition().x, player.getCurrentPosition().y, 16, 16 };
+    Rectangle enemy_rec = { this->enemy.getCurrentPosition().x, this->enemy.getCurrentPosition().y, 16, 16 };
     Rectangle collider_rec = { 0, 0, 16, 16 };
     for (const auto& tile : this->woodland_tiles_collider_vector) {
 
@@ -187,9 +189,16 @@ void WoodlandScene::detectCollision(Player& player) {
         if (CheckCollisionRecs(player_rec, collider_rec)) {
             player.setCurrentPosition(player.getLastPosition());
         }
+        if (CheckCollisionRecs(enemy_rec, collider_rec)) {
+            this->enemy.setCurrentPosition(this->enemy.getLastPosition());
+        }
+        if (CheckCollisionCircles(this->enemy.getCurrentPosition(), 6, player.getCurrentPosition(), 6)) {
+            this->enemy.setIsDead(true);
+            this->enemy.setFrameConter(0);
+        }
     }
-    */
 
+    /*
     for (const auto& tile : this->woodland_tiles_collider_vector) {
         if (CheckCollisionCircles(player.getCurrentPosition(), 6, tile->collider_position, 8)) {
             player.setCurrentPosition(player.getLastPosition());
@@ -201,7 +210,7 @@ void WoodlandScene::detectCollision(Player& player) {
             this->enemy.setIsDead(true);
             this->enemy.setFrameConter(0);
         }
-    }
+    }*/
     player.setLastPosition(player.getCurrentPosition());
     this->enemy.setLastPosition(this->enemy.getCurrentPosition());
 }

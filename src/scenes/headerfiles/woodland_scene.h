@@ -27,7 +27,6 @@ public:
 
 private:
 
-	Texture2D player_ui_texture;
 	Texture2D tile_atlas_texture;
 	LevelTile woodland_tiles;
 	Enemy enemy;

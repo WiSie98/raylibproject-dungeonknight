@@ -24,12 +24,16 @@ void PlayerCamera::update(Player& player) {
 
     this->main_hud.update();
     this->main_hud.setSpritesheetDestination(player.getCurrentPosition().x - (static_cast<float>(GetScreenWidth() / 2)) / getPlayerCamera().zoom, player.getCurrentPosition().y - (static_cast<float>(GetScreenHeight() / 2)) / getPlayerCamera().zoom, this->main_hud.getSpritesheetDestination().width, this->main_hud.getSpritesheetDestination().height);
+    
+    this->inventory_ui.update();
+    this->inventory_ui.generateInventoryHitbox(this->playerCamera.target);
 }
 
 void PlayerCamera::draw(Player& player) {
     this->main_hud.draw();
     DrawTexturePro(this->main_hud_texture, Rectangle{ 96, 0, 216, 48 }, Rectangle{ player.getCurrentPosition().x - (216 * this->main_hud.getScale()) / 2, player.getCurrentPosition().y - (static_cast<float>(GetScreenHeight() / 2)) / getPlayerCamera().zoom, 216 * this->main_hud.getScale(), 48 * this->main_hud.getScale()}, Vector2{0, 0}, 0, WHITE);
     DrawText(TextFormat("%i", player.getMoney()), player.getCurrentPosition().x, (player.getCurrentPosition().y - (static_cast<float>(GetScreenHeight() / 2)) / getPlayerCamera().zoom) + 24, 4, BLACK);
+    this->inventory_ui.drawCurrentWindow(this->playerCamera.target);
 }
 
 //----------------------------Setter----------------------------------
@@ -67,4 +71,8 @@ Camera2D PlayerCamera::getPlayerCamera() {
 
 Texture2D PlayerCamera::getMainHUDTexture() {
     return this->main_hud_texture;
+}
+
+InventoryUI& PlayerCamera::getInventoryUI() {
+    return this->inventory_ui;
 }

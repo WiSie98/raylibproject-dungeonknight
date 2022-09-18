@@ -16,7 +16,7 @@ Enemy::Enemy(std::string name, std::string description, Vector2 origin, Texture2
 	setCurrentPosition(origin);
 	setLastPosition(origin);
 	setMaxHealth(health);
-	setMaxDeathTimer(180);
+	setMaxDeathTimer(10);
 	setDeathTimer(0);
 	setFrameConter(0);
 	setIsDead(false);

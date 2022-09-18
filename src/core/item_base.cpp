@@ -22,6 +22,14 @@ void ItemBase::setIsVisible(bool is_visible) {
 	this->is_visible = is_visible;
 }
 
+void ItemBase::setDedicatedSlot(int dedicated_slot) {
+	this->dedicated_slot = dedicated_slot;
+}
+
+void ItemBase::setId(unsigned int id) {
+	this->id = id;
+}
+
 void ItemBase::setType(ItemType type) {
 	this->type = type;
 }

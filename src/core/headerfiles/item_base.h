@@ -10,6 +10,8 @@ public:
 	void setWeight(float weight);
 	void setCost(float cost);
 	void setIsVisible(bool is_visible);
+	void setDedicatedSlot(int dedicated_slot);
+	void setId(unsigned int id);
 	void setType(ItemType type);
 	void setSpritesheetPosition(Rectangle spritesheet_position);
 
@@ -25,7 +27,7 @@ public:
 
 private:
 
-	void setId(unsigned int id);
+
 
 protected:
 
@@ -38,7 +40,5 @@ protected:
 	unsigned int id;
 	ItemType type;
 	Rectangle spritesheet_position;
-
-	virtual void setDedicatedSlot(int dedicated_slot) = 0;
 
 };
