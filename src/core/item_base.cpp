@@ -30,12 +30,20 @@ void ItemBase::setId(unsigned int id) {
 	this->id = id;
 }
 
+void ItemBase::setDynamicId(unsigned int dynamic_id) {
+	this->dynamic_id = dynamic_id;
+}
+
 void ItemBase::setType(ItemType type) {
 	this->type = type;
 }
 
 void ItemBase::setSpritesheetPosition(Rectangle spritesheet_position) {
 	this->spritesheet_position = spritesheet_position;
+}
+
+void ItemBase::setSpritesheet(Texture2D spritesheet) {
+	this->spritesheet = spritesheet;
 }
 
 //----------------------------Getter----------------------------------
@@ -68,10 +76,18 @@ unsigned int ItemBase::getId() {
 	return this->id;
 }
 
+unsigned int ItemBase::getDynamicId() {
+	return this->dynamic_id;
+}
+
 ItemType ItemBase::getType() {
 	return this->type;
 }
 
 Rectangle ItemBase::getSpritesheetPosition() {
 	return this->spritesheet_position;
+}
+
+Texture2D& ItemBase::getSpritesheet() {
+	return this->spritesheet;
 }

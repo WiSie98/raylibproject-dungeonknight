@@ -32,7 +32,11 @@ void WoodlandScene::update(Player& player, PlayerCamera& camera) {
     }
     detectCollision(player);
 
+    // Camera and Inventory.
     camera.update(player);
+    player.getInventory().checkDedicatedWeaponSlotPressed(camera.getPlayerCamera().target, camera.getInventoryUI());
+    player.getInventory().checkDedicatedItemSlotPressed(camera.getPlayerCamera().target, camera.getInventoryUI());
+    player.getInventory().checkInventorySlotPressed(camera.getPlayerCamera().target, camera.getInventoryUI());
 }
 
 void WoodlandScene::draw(Player& player, PlayerCamera& camera) {

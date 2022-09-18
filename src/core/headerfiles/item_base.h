@@ -12,8 +12,10 @@ public:
 	void setIsVisible(bool is_visible);
 	void setDedicatedSlot(int dedicated_slot);
 	void setId(unsigned int id);
+	void setDynamicId(unsigned int dynamic_id);
 	void setType(ItemType type);
 	void setSpritesheetPosition(Rectangle spritesheet_position);
+	void setSpritesheet(Texture2D spritesheet);
 
 	std::string getName();
 	std::string getDescription();
@@ -22,8 +24,10 @@ public:
 	bool getIsVisible();
 	int getDedicatedSlot();
 	unsigned int getId();
+	unsigned int getDynamicId();
 	ItemType getType();
 	Rectangle getSpritesheetPosition();
+	Texture2D& getSpritesheet();
 
 private:
 
@@ -38,7 +42,9 @@ protected:
 	bool is_visible;
 	int dedicated_slot;
 	unsigned int id;
+	unsigned int dynamic_id;
 	ItemType type;
 	Rectangle spritesheet_position;
+	Texture2D spritesheet;
 
 };

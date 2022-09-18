@@ -14,18 +14,22 @@ public:
 	void update();
 	void draw();
 
-	void checkDedicatedWeaponSlotPressed(Vector2 target);
-	void checkDedicatedItemSlotPressed(Vector2 target);
-	void checkInventorySlotPressed(std::vector<std::shared_ptr<InventoryHitbox>>& hitbox_vector, InventoryWindow current_window, Vector2 target);
+	// Checks the Hitboxes of the specific Inventory Slots.
+	void checkDedicatedWeaponSlotPressed(Vector2 target, InventoryUI& inventory_ui);
+	void checkDedicatedItemSlotPressed(Vector2 target, InventoryUI& inventory_ui);
+	void checkInventorySlotPressed(Vector2 target, InventoryUI& inventory_ui);
 
-	void addDedicatedWeapon(int slot_num, std::shared_ptr<ItemBase>& weapon);
-	void addDedicatedItem(int slot_num, std::shared_ptr<ItemBase>& item);
+	// Dedicated Inventory Slots.
+	void addDedicatedWeapon(int slot_num);
+	void addDedicatedItem(int slot_num);
 	void removeDedicatedWeapon(int slot_num);
 	void removeDedicatedItem(int slot_num);
 	std::shared_ptr<ItemBase> getDedicatedWeapon(int slot_num);
 	std::shared_ptr<ItemBase> getDedicatedItem(int slot_num);
 
+	// Normal Inventory.
 	void addItemToInventory(std::shared_ptr<ItemBase> item);
+	void removeWeaponFromInventory(int slot);
 	void removeItemFromInventory(int slot);
 	std::shared_ptr<ItemBase> getItemFromInventory(int slot);
 
