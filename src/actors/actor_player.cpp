@@ -35,7 +35,7 @@ void Player::playerMovement() {
 		setTraverseSpeed(3.4f);
 		this->animation.setFrameSpeed(28);
 		if (this->stamina < this->max_stamina && !IsKeyDown(KEY_NULL)) {
-			setStamina(getStamina() + 0.5);
+			setStamina(getStamina() + 0.5f);
 		}
 		else if (this->stamina < this->max_stamina && IsKeyDown(KEY_NULL)) {
 			setStamina(getStamina() + 1);

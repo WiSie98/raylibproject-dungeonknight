@@ -1,8 +1,9 @@
 #include "headerfiles/actor_enemy.h"
 
-Enemy::Enemy(std::string name, std::string description, Vector2 origin, Texture2D texture, int frame_speed, int frame_width, int frame_height, float health, float traverse_speed, int money_drop, float damage, Weaknesses weaknesses) : animation(frame_speed, frame_width, frame_height, texture) {
+Enemy::Enemy(std::string name, std::string description, unsigned int id, Vector2 origin, Texture2D texture, int frame_speed, int frame_width, int frame_height, float health, float traverse_speed, int money_drop, float damage, Weaknesses weaknesses) : animation(frame_speed, static_cast<float>(frame_width), static_cast<float>(frame_height), texture) {
 	setName(name);
 	setDescription(description);
+	setId(id);
 	setOrigin(origin);
 	setTexture(texture);
 	setHealth(health);
@@ -170,6 +171,10 @@ void Enemy::setDescription(std::string description) {
 	this->description = description;
 }
 
+void Enemy::setId(unsigned int id) {
+	this->id = id;
+}
+
 void Enemy::setMoneyDrop(int money_drop) {
 	this->money_drop = money_drop;
 }
@@ -245,6 +250,10 @@ std::string Enemy::getName() {
 
 std::string Enemy::getDescription() {
 	return this->description;
+}
+
+unsigned int Enemy::getId() {
+	return this->id;
 }
 
 int Enemy::getMoneyDrop() {

@@ -45,7 +45,7 @@ SceneType MainMenuScene::setNextScene(Player& player, bool& exitWindowRequested)
 	for (int i = 0; i < this->button_vector.size(); i++) {
 		if (this->button_vector[i].getIsButtonAction()) {
 			if (this->button_vector[i].getButtonType() == START_BUTTON) {
-				player.setCurrentPosition(2048, 2048);
+				player.setCurrentPosition(5936, 2960);
 				return WOODLAND_SCENE;
 			}
 			else if (this->button_vector[i].getButtonType() == EXIT_BUTTON) {

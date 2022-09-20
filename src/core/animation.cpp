@@ -1,7 +1,7 @@
 #include "headerfiles/animation.h"
 
 Animation::Animation(int frame_speed, float frame_width, float frame_height, Texture2D& spritesheet) : frame_speed(frame_speed), frame_counter(0), current_frame(0), spritesheet(spritesheet), current_state(NONE), last_state(STANDING_DOWN) {
-	setSpritesheetRectangle(0, 0, frame_width, frame_height);
+	setSpritesheetRectangle(0.0f, 0.0f, frame_width, frame_height);
 }
 
 Animation::~Animation() {}

@@ -12,7 +12,7 @@
 int main() {
     // Raylib initialization
     // Project name, screen size, fullscreen mode etc. can be specified in the config.h.in file
-    
+
 	unsigned int target_fps = 60;       // Flag to set the Target FPS
     bool exitWindowRequested = false;   // Flag to request window to exit
     bool exitWindow = false;            // Flag to set window to exit

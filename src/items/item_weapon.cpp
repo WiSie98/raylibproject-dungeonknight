@@ -1,5 +1,6 @@
 #include "headerfiles/item_weapon.h"
 
+/*
 Weapon::Weapon(std::string name, std::string description, float weight, float cost, float damage, float durability, ElementalEffects element, unsigned int id, ItemType type, Rectangle spritesheet_position, Texture2D spritesheet) {
 	setName(name);
 	setDescription(description);
@@ -17,13 +18,26 @@ Weapon::Weapon(std::string name, std::string description, float weight, float co
 	setDedicatedSlot(-1);
 	setDynamicId(0);
 }
+*/
 
 Weapon::~Weapon() {
 
 }
 
+bool operator== (Weapon& lhs, Weapon& rhs) {
+	if (lhs.id == rhs.id) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Weapon::setNull() {}
+
 //----------------------------Setter----------------------------------
 
+/*
 void Weapon::setDamage(float damage) {
 	this->damage = damage;
 }
@@ -49,3 +63,4 @@ float Weapon::getDurability() {
 ElementalEffects Weapon::getElement() {
 	return this->element;
 }
+*/

@@ -22,10 +22,6 @@ void ItemBase::setIsVisible(bool is_visible) {
 	this->is_visible = is_visible;
 }
 
-void ItemBase::setDedicatedSlot(int dedicated_slot) {
-	this->dedicated_slot = dedicated_slot;
-}
-
 void ItemBase::setId(unsigned int id) {
 	this->id = id;
 }
@@ -44,6 +40,28 @@ void ItemBase::setSpritesheetPosition(Rectangle spritesheet_position) {
 
 void ItemBase::setSpritesheet(Texture2D spritesheet) {
 	this->spritesheet = spritesheet;
+}
+
+// Weapon setter.
+void ItemBase::setDamage(float damage) {
+	this->damage = damage;
+}
+
+void ItemBase::setDurability(float durability) {
+	this->durability = durability;
+}
+
+void ItemBase::setElement(ElementalEffects element) {
+	this->element = element;
+}
+
+// Consumable setter.
+void ItemBase::setQuantity(int quantity) {
+	this->quantity = quantity;
+}
+
+void ItemBase::setMaxQuantity(int max_quantity) {
+	this->max_quantity = max_quantity;
 }
 
 //----------------------------Getter----------------------------------
@@ -68,10 +86,6 @@ bool ItemBase::getIsVisible() {
 	return is_visible;
 }
 
-int ItemBase::getDedicatedSlot() {
-	return this->dedicated_slot;
-}
-
 unsigned int ItemBase::getId() {
 	return this->id;
 }
@@ -90,4 +104,26 @@ Rectangle ItemBase::getSpritesheetPosition() {
 
 Texture2D& ItemBase::getSpritesheet() {
 	return this->spritesheet;
+}
+
+// Weapon getter.
+float ItemBase::getDamage() {
+	return this->damage;
+}
+
+float ItemBase::getDurability() {
+	return this->durability;
+}
+
+ElementalEffects ItemBase::getElement() {
+	return this->element;
+}
+
+// Consumable getter.
+int ItemBase::getQuantity() {
+	return this->quantity;
+}
+
+int ItemBase::getMaxQuantity() {
+	return this->max_quantity;
 }

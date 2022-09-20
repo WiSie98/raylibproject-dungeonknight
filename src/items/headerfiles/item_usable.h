@@ -6,17 +6,27 @@
 class Usable final : public ItemBase {
 public:
 
+	/*
 	Usable(std::string name, std::string description, float weight, float cost, float durability, unsigned int id, ItemType type, Rectangle spritesheet_position, Texture2D spritesheet);
+	*/
 
 	~Usable();
 
+	friend bool operator== (Usable& lhs, Usable& rhs);
+
+	void setNull() override;
+
+	/*
 	void setDurability(float durability);
 
 	float getDurability();
+	*/
 
 private:
 
+	/*
 	float durability;
+	*/
 
 protected:
 

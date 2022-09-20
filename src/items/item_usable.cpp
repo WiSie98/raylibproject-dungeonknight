@@ -1,5 +1,6 @@
 #include "headerfiles/item_usable.h"
 
+/*
 Usable::Usable(std::string name, std::string description, float weight, float cost, float durability, unsigned int id, ItemType type, Rectangle spritesheet_position, Texture2D spritesheet) {
 	setName(name);
 	setDescription(description);
@@ -15,13 +16,26 @@ Usable::Usable(std::string name, std::string description, float weight, float co
 	setDedicatedSlot(-1);
 	setDynamicId(0);
 }
+*/
 
 Usable::~Usable() {
 
 }
 
+bool operator== (Usable& lhs, Usable& rhs) {
+	if (lhs.id == rhs.id) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Usable::setNull() {}
+
 //----------------------------Setter----------------------------------
 
+/*
 void Usable::setDurability(float durability) {
 	this->durability = durability;
 }
@@ -31,3 +45,4 @@ void Usable::setDurability(float durability) {
 float Usable::getDurability() {
 	return this->durability;
 }
+*/

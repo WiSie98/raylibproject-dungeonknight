@@ -1,5 +1,6 @@
 #include "headerfiles/item_consumable.h"
 
+/*
 Consumable::Consumable(std::string name, std::string description, float weight, float cost, int max_quantity, unsigned int id, ItemType type, Rectangle spritesheet_position, Texture2D spritesheet) {
 	setName(name);
 	setDescription(description);
@@ -16,13 +17,26 @@ Consumable::Consumable(std::string name, std::string description, float weight, 
 	setDynamicId(0);
 	setQuantity(1);
 }
+*/
 
 Consumable::~Consumable() {
 
 }
 
+bool operator== (Consumable& lhs, Consumable& rhs) {
+	if (lhs.id == rhs.id) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Consumable::setNull() {}
+
 //----------------------------Setter----------------------------------
 
+/*
 void Consumable::setQuantity(int quantity) {
 	this->quantity = quantity;
 }
@@ -40,3 +54,4 @@ int Consumable::getQuantity() {
 int Consumable::getMaxQuantity() {
 	return this->max_quantity;
 }
+*/

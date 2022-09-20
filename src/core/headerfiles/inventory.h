@@ -2,6 +2,9 @@
 
 #include "header.h"
 #include "../../core/headerfiles/item_base.h"
+#include "../../items/headerfiles/item_weapon.h"
+#include "../../items/headerfiles/item_consumable.h"
+#include "../../items/headerfiles/item_usable.h"
 #include "../../ui/headerfiles/ui_inventory.h"
 
 class Inventory {
@@ -36,8 +39,15 @@ public:
 	std::vector<std::shared_ptr<ItemBase>>& getInventoryVector();
 	std::vector<std::shared_ptr<ItemBase>>& getStorageVector();
 	std::vector<std::shared_ptr<ItemBase>>& getLostInventoryVector();
+	std::vector<std::shared_ptr<ItemBase>>& getItemsVector();
+	std::shared_ptr<ItemBase> getRandomItem();
 
 private:
+
+	void generateItems();
+
+	Texture2D weapon_texture;
+	Texture2D item_texture;
 	
 	std::shared_ptr<ItemBase> dedicated_weapon_slot1;
 	std::shared_ptr<ItemBase> dedicated_weapon_slot2;
@@ -53,6 +63,8 @@ private:
 	std::vector<std::shared_ptr<ItemBase>> storage_weapons_vector;
 	std::vector<std::shared_ptr<ItemBase>> storage_items_vector;
 	std::vector<std::shared_ptr<ItemBase>> lost_inventory_vector;
+
+	std::vector<std::shared_ptr<ItemBase>> items_vector;
 
 protected:
 

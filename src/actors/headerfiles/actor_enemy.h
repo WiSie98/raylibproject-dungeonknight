@@ -9,7 +9,7 @@
 class Enemy final : public ActorBase {
 public:
 
-	Enemy(std::string name, std::string description, Vector2 origin, Texture2D texture, int frame_speed, int frame_width, int frame_height, float health, float traverse_speed, int money_drop, float damage, Weaknesses weaknesses);
+	Enemy(std::string name, std::string description, unsigned int id, Vector2 origin, Texture2D texture, int frame_speed, int frame_width, int frame_height, float health, float traverse_speed, int money_drop, float damage, Weaknesses weaknesses);
 
 	~Enemy();
 
@@ -20,6 +20,7 @@ public:
 
 	void setName(std::string name);
 	void setDescription(std::string description);
+	void setId(unsigned int id);
 	void setMoneyDrop(int money_drop);
 	void setMaxDeathTimer(int max_death_timer);
 	void setDeathTimer(int death_timer);
@@ -34,6 +35,7 @@ public:
 
 	std::string getName();
 	std::string getDescription();
+	unsigned int getId();
 	int getMoneyDrop();
 	int getMaxDeathTimer();
 	int getDeathTimer();
@@ -50,6 +52,7 @@ private:
 
 	std::string name;
 	std::string description;
+	unsigned int id;
 	int money_drop;
 	int max_death_timer;
 	int death_timer;
