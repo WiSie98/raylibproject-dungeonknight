@@ -20,14 +20,14 @@ Dungeon Knight is an open world RPG with rougelike and puzzle elements which was
 The project was created as part of a project during my studies and is not completely finished but is still executable and playable.
 We also used the raylib-minimal template which was provided by `https://github.com/chfhhd`.
 
-The parts that are not finished are:
+The parts that are not finished:
 - sound
 - combat system
 - puzzles
 - additional levels
 - frendly npcs
 
-The parts that are finished are:
+The parts that are finished:
 - ui
 - scenes
 - scene manager
