@@ -19,6 +19,7 @@ private:
 	
 	Texture2D logo;
 	Texture2D ui_buttons;
+	Texture2D background;
 
 	std::vector<Button> button_vector;
 };

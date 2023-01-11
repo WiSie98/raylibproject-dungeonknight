@@ -4,6 +4,7 @@ MainMenuScene::MainMenuScene() {
 	setSceneType(MAIN_MENU_SCENE);
 	this->logo = LoadTexture("./assets/graphics/sprites/dk_spt_mainlogo.png");
 	this->ui_buttons = LoadTexture("./assets/graphics/spritesheets/dk_sptsht_ui_buttons.png");
+	this->background = LoadTexture("./assets/graphics/backgrounds/dk_bg_mainbackground.png");
 
 	Button start_button(this->ui_buttons, 72, 0, 72, 24, (GetScreenWidth() / 2) - ((72 * 4) / 2), (GetScreenHeight() / 2), 4, "Start", START_BUTTON);
 	start_button.setSpritesheet(this->ui_buttons);
@@ -34,6 +35,7 @@ void MainMenuScene::update(Player& player, PlayerCamera& camera) {
 }
 
 void MainMenuScene::draw(Player& player, PlayerCamera& camera) {
+	DrawTexture(this->background, 0, 0, WHITE);
 	DrawTexturePro(this->logo, Rectangle{ 0.0f, 0.0f, static_cast<float>(this->logo.width), static_cast<float>(this->logo.height) }, Rectangle{ static_cast<float>((GetScreenWidth() / 2)), static_cast<float>((GetScreenHeight() / 3)), static_cast<float>(this->logo.width * 2), static_cast<float>(this->logo.height * 2) }, Vector2{ static_cast<float>(this->logo.width), static_cast<float>(this->logo.height) }, 0, WHITE);
 	for (int i = 0; i < this->button_vector.size(); i++) {
 		this->button_vector[i].draw();
